@@ -45,8 +45,8 @@
 		A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01EDAEB1A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PebbleAuthenticatorTests.swift; sourceTree = "<group>"; };
-		A01EDAF61A1809F700F152CE /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleKit.framework; sourceTree = "<group>"; };
-		A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleVendor.framework; sourceTree = "<group>"; };
+		A01EDAF61A1809F700F152CE /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleKit.framework; path = PebbleAuthenticator/PebbleKit.framework; sourceTree = "<group>"; };
+		A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleVendor.framework; path = PebbleAuthenticator/PebbleVendor.framework; sourceTree = "<group>"; };
 		A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		A01EDAFC1A180A3A00F152CE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -82,14 +82,10 @@
 		A01EDAC51A1808F500F152CE = {
 			isa = PBXGroup;
 			children = (
-				A01EDB021A180A5D00F152CE /* MessageUI.framework */,
-				A01EDB001A180A5200F152CE /* CoreMotion.framework */,
-				A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */,
-				A01EDAFC1A180A3A00F152CE /* libz.dylib */,
-				A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */,
 				A01EDAD01A1808F500F152CE /* PebbleAuthenticator */,
 				A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */,
 				A01EDACF1A1808F500F152CE /* Products */,
+				A01EDB041A180DDD00F152CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,8 +115,6 @@
 		A01EDAD11A1808F500F152CE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */,
-				A01EDAF61A1809F700F152CE /* PebbleKit.framework */,
 				A01EDAD21A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -141,6 +135,20 @@
 				A01EDAEB1A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A01EDB041A180DDD00F152CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDB021A180A5D00F152CE /* MessageUI.framework */,
+				A01EDB001A180A5200F152CE /* CoreMotion.framework */,
+				A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */,
+				A01EDAFC1A180A3A00F152CE /* libz.dylib */,
+				A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */,
+				A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */,
+				A01EDAF61A1809F700F152CE /* PebbleKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
