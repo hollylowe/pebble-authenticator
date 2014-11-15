@@ -73,6 +73,32 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection footerTitle="Enter a time-based key." id="S4m-Eg-99c">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="nw4-83-bxr">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nw4-83-bxr" id="xj2-0f-yQ0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Key" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SHX-Lu-q8K">
+                                                    <rect key="frame" x="8" y="7" width="584" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5tu-IX-yfs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="SHX-Lu-q8K" firstAttribute="trailing" secondItem="xj2-0f-yQ0" secondAttribute="trailingMargin" id="0Qv-Lt-GXg"/>
+                                                <constraint firstItem="SHX-Lu-q8K" firstAttribute="leading" secondItem="xj2-0f-yQ0" secondAttribute="leadingMargin" id="0zS-Lx-4yJ"/>
+                                                <constraint firstAttribute="centerY" secondItem="SHX-Lu-q8K" secondAttribute="centerY" id="ZD1-On-ucg"/>
+                                                <constraint firstAttribute="centerX" secondItem="SHX-Lu-q8K" secondAttribute="centerX" id="hEa-gq-YQo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="ZOT-4o-tcg" id="syz-yS-GWN"/>
