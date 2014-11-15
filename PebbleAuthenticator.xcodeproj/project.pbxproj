@@ -14,6 +14,13 @@
 		A01EDADE1A1808F500F152CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADD1A1808F500F152CE /* Images.xcassets */; };
 		A01EDAE11A1808F500F152CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADF1A1808F500F152CE /* LaunchScreen.xib */; };
 		A01EDAED1A1808F500F152CE /* PebbleAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */; };
+		A01EDAF71A1809F700F152CE /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAF61A1809F700F152CE /* PebbleKit.framework */; };
+		A01EDAF91A180A0F00F152CE /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */; };
+		A01EDAFB1A180A2700F152CE /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */; };
+		A01EDAFD1A180A3A00F152CE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFC1A180A3A00F152CE /* libz.dylib */; };
+		A01EDAFF1A180A4800F152CE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */; };
+		A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB001A180A5200F152CE /* CoreMotion.framework */; };
+		A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB021A180A5D00F152CE /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +45,13 @@
 		A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01EDAEB1A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PebbleAuthenticatorTests.swift; sourceTree = "<group>"; };
+		A01EDAF61A1809F700F152CE /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleKit.framework; sourceTree = "<group>"; };
+		A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleVendor.framework; sourceTree = "<group>"; };
+		A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		A01EDAFC1A180A3A00F152CE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		A01EDB001A180A5200F152CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A01EDB021A180A5D00F152CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +59,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */,
+				A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */,
+				A01EDAFF1A180A4800F152CE /* CoreBluetooth.framework in Frameworks */,
+				A01EDAFD1A180A3A00F152CE /* libz.dylib in Frameworks */,
+				A01EDAFB1A180A2700F152CE /* ExternalAccessory.framework in Frameworks */,
+				A01EDAF91A180A0F00F152CE /* PebbleVendor.framework in Frameworks */,
+				A01EDAF71A1809F700F152CE /* PebbleKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +82,11 @@
 		A01EDAC51A1808F500F152CE = {
 			isa = PBXGroup;
 			children = (
+				A01EDB021A180A5D00F152CE /* MessageUI.framework */,
+				A01EDB001A180A5200F152CE /* CoreMotion.framework */,
+				A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */,
+				A01EDAFC1A180A3A00F152CE /* libz.dylib */,
+				A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */,
 				A01EDAD01A1808F500F152CE /* PebbleAuthenticator */,
 				A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */,
 				A01EDACF1A1808F500F152CE /* Products */,
@@ -93,6 +119,8 @@
 		A01EDAD11A1808F500F152CE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */,
+				A01EDAF61A1809F700F152CE /* PebbleKit.framework */,
 				A01EDAD21A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -340,8 +368,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PebbleAuthenticator",
+				);
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -350,8 +383,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PebbleAuthenticator",
+				);
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -409,6 +447,7 @@
 				A01EDAF21A1808F500F152CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +456,7 @@
 				A01EDAF51A1808F500F152CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
