@@ -5,7 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>64D52008-6F56-4B98-9B60-3B987D4415EC</string>
+=======
+	<string>2FD4D7A8-62FC-4C01-86AD-9A353A0AD284</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectName</key>
 	<string>PebbleAuthenticator</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -34,7 +38,11 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>2333EE00FCE5E74B2E59D471BE5325C223386A1B</string>
 			<key>IDESourceControlWCCName</key>
+<<<<<<< HEAD
 			<string>pebble-authenticator</string>
+=======
+			<string>PebbleAuthenticator</string>
+>>>>>>> FETCH_HEAD
 		</dict>
 	</array>
 </dict>
