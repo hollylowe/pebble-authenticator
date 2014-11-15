@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01253801A181511006F0E83 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = A012537F1A181511006F0E83 /* Account.swift */; };
 		A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD31A1808F500F152CE /* AppDelegate.swift */; };
 		A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */; };
-		A01EDAD91A1808F500F152CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD81A1808F500F152CE /* ViewController.swift */; };
+		A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD81A1808F500F152CE /* MainTableViewController.swift */; };
 		A01EDADC1A1808F500F152CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADA1A1808F500F152CE /* Main.storyboard */; };
 		A01EDADE1A1808F500F152CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADD1A1808F500F152CE /* Images.xcassets */; };
 		A01EDAE11A1808F500F152CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADF1A1808F500F152CE /* LaunchScreen.xib */; };
@@ -21,6 +22,7 @@
 		A01EDAFF1A180A4800F152CE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */; };
 		A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB001A180A5200F152CE /* CoreMotion.framework */; };
 		A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB021A180A5D00F152CE /* MessageUI.framework */; };
+		A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A012537F1A181511006F0E83 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PebbleAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01EDAD21A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01EDAD31A1808F500F152CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01EDAD61A1808F500F152CE /* PebbleAuthenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PebbleAuthenticator.xcdatamodel; sourceTree = "<group>"; };
-		A01EDAD81A1808F500F152CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A01EDAD81A1808F500F152CE /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		A01EDADB1A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A01EDADD1A1808F500F152CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A01EDAE01A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		A01EDB001A180A5200F152CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A01EDB021A180A5D00F152CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A012537E1A1814ED006F0E83 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */,
+				A012537F1A181511006F0E83 /* Account.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		A01EDAC51A1808F500F152CE = {
 			isa = PBXGroup;
 			children = (
@@ -102,11 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				A01EDAD31A1808F500F152CE /* AppDelegate.swift */,
-				A01EDAD81A1808F500F152CE /* ViewController.swift */,
-				A01EDADA1A1808F500F152CE /* Main.storyboard */,
-				A01EDADD1A1808F500F152CE /* Images.xcassets */,
-				A01EDADF1A1808F500F152CE /* LaunchScreen.xib */,
-				A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */,
+				A01EDB091A18117D00F152CE /* Views */,
+				A012537E1A1814ED006F0E83 /* Models */,
+				A01EDB0A1A18118300F152CE /* Controllers */,
 				A01EDAD11A1808F500F152CE /* Supporting Files */,
 			);
 			path = PebbleAuthenticator;
@@ -115,6 +126,8 @@
 		A01EDAD11A1808F500F152CE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A01EDADD1A1808F500F152CE /* Images.xcassets */,
+				A01EDADF1A1808F500F152CE /* LaunchScreen.xib */,
 				A01EDAD21A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -149,6 +162,23 @@
 				A01EDAF61A1809F700F152CE /* PebbleKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A01EDB091A18117D00F152CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDADA1A1808F500F152CE /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A01EDB0A1A18118300F152CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDAD81A1808F500F152CE /* MainTableViewController.swift */,
+				A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,9 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01EDAD91A1808F500F152CE /* ViewController.swift in Sources */,
+				A01253801A181511006F0E83 /* Account.swift in Sources */,
+				A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */,
 				A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */,
 				A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */,
+				A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
