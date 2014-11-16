@@ -31,8 +31,6 @@ class AddAccountTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-
-        
         super.viewDidLoad()
     }
 }

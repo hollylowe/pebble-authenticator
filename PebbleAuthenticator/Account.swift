@@ -15,8 +15,6 @@ class Account: NSManagedObject {
     @NSManaged var name : NSString
     @NSManaged var timeBasedKey : NSString
     
-
-    
     class func createNewAccount(newName: String, newTimeBasedKey: String) {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let managedContext = appDelegate.managedObjectContext {

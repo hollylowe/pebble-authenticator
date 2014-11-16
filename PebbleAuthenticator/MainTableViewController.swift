@@ -38,14 +38,44 @@ class MainTableViewController: UITableViewController {
         
         super.prepareForSegue(segue, sender: sender)
     }
+
+    func deleteAccountRowAction(rowAction: UITableViewRowAction!, indexPath: NSIndexPath!) {
+        self.tableView.beginUpdates()
+        
+        let account = accounts[indexPath.row]
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let context = appDelegate.managedObjectContext {
+           context.deleteObject(account)
+        }
+        appDelegate.saveContext()
+        
+        accounts = Account.fetchAllAccounts()
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        
+        self.tableView.endUpdates()
+    }
 }
 
+extension MainTableViewController: UITableViewDelegate {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler: deleteAccountRowAction)
+        deleteAction.backgroundColor = UIColor.redColor()
+        
+        return [deleteAction]
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+}
 
 extension MainTableViewController: UITableViewDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let account = accounts[indexPath.row]
-        cell.textLabel.text = account.valueForKey("name") as String! 
+        cell.textLabel.text = account.valueForKey("name") as String!
         return cell
     }
     
