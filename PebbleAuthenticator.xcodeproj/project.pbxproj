@@ -7,48 +7,73 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A01EDA721A18054600F152CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDA711A18054600F152CE /* AppDelegate.swift */; };
-		A01EDA751A18054600F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A01EDA731A18054600F152CE /* PebbleAuthenticator.xcdatamodeld */; };
-		A01EDA771A18054600F152CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDA761A18054600F152CE /* ViewController.swift */; };
-		A01EDA7A1A18054600F152CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01EDA781A18054600F152CE /* Main.storyboard */; };
-		A01EDA7C1A18054600F152CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01EDA7B1A18054600F152CE /* Images.xcassets */; };
-		A01EDA7F1A18054600F152CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01EDA7D1A18054600F152CE /* LaunchScreen.xib */; };
-		A01EDA8B1A18054600F152CE /* PebbleAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDA8A1A18054600F152CE /* PebbleAuthenticatorTests.swift */; };
+		A01253801A181511006F0E83 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = A012537F1A181511006F0E83 /* Account.swift */; };
+		A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD31A1808F500F152CE /* AppDelegate.swift */; };
+		A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */; };
+		A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAD81A1808F500F152CE /* MainTableViewController.swift */; };
+		A01EDADC1A1808F500F152CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADA1A1808F500F152CE /* Main.storyboard */; };
+		A01EDADE1A1808F500F152CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADD1A1808F500F152CE /* Images.xcassets */; };
+		A01EDAE11A1808F500F152CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01EDADF1A1808F500F152CE /* LaunchScreen.xib */; };
+		A01EDAED1A1808F500F152CE /* PebbleAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */; };
+		A01EDAF71A1809F700F152CE /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAF61A1809F700F152CE /* PebbleKit.framework */; };
+		A01EDAF91A180A0F00F152CE /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */; };
+		A01EDAFB1A180A2700F152CE /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */; };
+		A01EDAFD1A180A3A00F152CE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFC1A180A3A00F152CE /* libz.dylib */; };
+		A01EDAFF1A180A4800F152CE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */; };
+		A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB001A180A5200F152CE /* CoreMotion.framework */; };
+		A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB021A180A5D00F152CE /* MessageUI.framework */; };
+		A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A01EDA851A18054600F152CE /* PBXContainerItemProxy */ = {
+		A01EDAE71A1808F500F152CE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A01EDA641A18054500F152CE /* Project object */;
+			containerPortal = A01EDAC61A1808F500F152CE /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A01EDA6B1A18054500F152CE;
+			remoteGlobalIDString = A01EDACD1A1808F500F152CE;
 			remoteInfo = PebbleAuthenticator;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A01EDA6C1A18054600F152CE /* PebbleAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PebbleAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A01EDA701A18054600F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A01EDA711A18054600F152CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A01EDA741A18054600F152CE /* PebbleAuthenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PebbleAuthenticator.xcdatamodel; sourceTree = "<group>"; };
-		A01EDA761A18054600F152CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A01EDA791A18054600F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A01EDA7B1A18054600F152CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A01EDA7E1A18054600F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A01EDA841A18054600F152CE /* PebbleAuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A01EDA891A18054600F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A01EDA8A1A18054600F152CE /* PebbleAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PebbleAuthenticatorTests.swift; sourceTree = "<group>"; };
+		A012537F1A181511006F0E83 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PebbleAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01EDAD21A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A01EDAD31A1808F500F152CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A01EDAD61A1808F500F152CE /* PebbleAuthenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PebbleAuthenticator.xcdatamodel; sourceTree = "<group>"; };
+		A01EDAD81A1808F500F152CE /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		A01EDADB1A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A01EDADD1A1808F500F152CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A01EDAE01A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01EDAEB1A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PebbleAuthenticatorTests.swift; sourceTree = "<group>"; };
+		A01EDAF61A1809F700F152CE /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleKit.framework; path = PebbleAuthenticator/PebbleKit.framework; sourceTree = "<group>"; };
+		A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleVendor.framework; path = PebbleAuthenticator/PebbleVendor.framework; sourceTree = "<group>"; };
+		A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		A01EDAFC1A180A3A00F152CE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		A01EDB001A180A5200F152CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A01EDB021A180A5D00F152CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A01EDA691A18054500F152CE /* Frameworks */ = {
+		A01EDACB1A1808F500F152CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */,
+				A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */,
+				A01EDAFF1A180A4800F152CE /* CoreBluetooth.framework in Frameworks */,
+				A01EDAFD1A180A3A00F152CE /* libz.dylib in Frameworks */,
+				A01EDAFB1A180A2700F152CE /* ExternalAccessory.framework in Frameworks */,
+				A01EDAF91A180A0F00F152CE /* PebbleVendor.framework in Frameworks */,
+				A01EDAF71A1809F700F152CE /* PebbleKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A01EDA811A18054600F152CE /* Frameworks */ = {
+		A01EDAE31A1808F500F152CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -58,73 +83,114 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A01EDA631A18054500F152CE = {
+		A012537E1A1814ED006F0E83 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA6E1A18054600F152CE /* PebbleAuthenticator */,
-				A01EDA871A18054600F152CE /* PebbleAuthenticatorTests */,
-				A01EDA6D1A18054600F152CE /* Products */,
+				A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */,
+				A012537F1A181511006F0E83 /* Account.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A01EDAC51A1808F500F152CE = {
+			isa = PBXGroup;
+			children = (
+				A01EDAD01A1808F500F152CE /* PebbleAuthenticator */,
+				A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */,
+				A01EDACF1A1808F500F152CE /* Products */,
+				A01EDB041A180DDD00F152CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		A01EDA6D1A18054600F152CE /* Products */ = {
+		A01EDACF1A1808F500F152CE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA6C1A18054600F152CE /* PebbleAuthenticator.app */,
-				A01EDA841A18054600F152CE /* PebbleAuthenticatorTests.xctest */,
+				A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */,
+				A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A01EDA6E1A18054600F152CE /* PebbleAuthenticator */ = {
+		A01EDAD01A1808F500F152CE /* PebbleAuthenticator */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA711A18054600F152CE /* AppDelegate.swift */,
-				A01EDA761A18054600F152CE /* ViewController.swift */,
-				A01EDA781A18054600F152CE /* Main.storyboard */,
-				A01EDA7B1A18054600F152CE /* Images.xcassets */,
-				A01EDA7D1A18054600F152CE /* LaunchScreen.xib */,
-				A01EDA731A18054600F152CE /* PebbleAuthenticator.xcdatamodeld */,
-				A01EDA6F1A18054600F152CE /* Supporting Files */,
+				A01EDAD31A1808F500F152CE /* AppDelegate.swift */,
+				A01EDB091A18117D00F152CE /* Views */,
+				A012537E1A1814ED006F0E83 /* Models */,
+				A01EDB0A1A18118300F152CE /* Controllers */,
+				A01EDAD11A1808F500F152CE /* Supporting Files */,
 			);
 			path = PebbleAuthenticator;
 			sourceTree = "<group>";
 		};
-		A01EDA6F1A18054600F152CE /* Supporting Files */ = {
+		A01EDAD11A1808F500F152CE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA701A18054600F152CE /* Info.plist */,
+				A01EDADD1A1808F500F152CE /* Images.xcassets */,
+				A01EDADF1A1808F500F152CE /* LaunchScreen.xib */,
+				A01EDAD21A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A01EDA871A18054600F152CE /* PebbleAuthenticatorTests */ = {
+		A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA8A1A18054600F152CE /* PebbleAuthenticatorTests.swift */,
-				A01EDA881A18054600F152CE /* Supporting Files */,
+				A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */,
+				A01EDAEA1A1808F500F152CE /* Supporting Files */,
 			);
 			path = PebbleAuthenticatorTests;
 			sourceTree = "<group>";
 		};
-		A01EDA881A18054600F152CE /* Supporting Files */ = {
+		A01EDAEA1A1808F500F152CE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDA891A18054600F152CE /* Info.plist */,
+				A01EDAEB1A1808F500F152CE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A01EDB041A180DDD00F152CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDB021A180A5D00F152CE /* MessageUI.framework */,
+				A01EDB001A180A5200F152CE /* CoreMotion.framework */,
+				A01EDAFE1A180A4800F152CE /* CoreBluetooth.framework */,
+				A01EDAFC1A180A3A00F152CE /* libz.dylib */,
+				A01EDAFA1A180A2700F152CE /* ExternalAccessory.framework */,
+				A01EDAF81A180A0F00F152CE /* PebbleVendor.framework */,
+				A01EDAF61A1809F700F152CE /* PebbleKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A01EDB091A18117D00F152CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDADA1A1808F500F152CE /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A01EDB0A1A18118300F152CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A01EDAD81A1808F500F152CE /* MainTableViewController.swift */,
+				A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A01EDA6B1A18054500F152CE /* PebbleAuthenticator */ = {
+		A01EDACD1A1808F500F152CE /* PebbleAuthenticator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A01EDA8E1A18054600F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */;
+			buildConfigurationList = A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */;
 			buildPhases = (
-				A01EDA681A18054500F152CE /* Sources */,
-				A01EDA691A18054500F152CE /* Frameworks */,
-				A01EDA6A1A18054500F152CE /* Resources */,
+				A01EDACA1A1808F500F152CE /* Sources */,
+				A01EDACB1A1808F500F152CE /* Frameworks */,
+				A01EDACC1A1808F500F152CE /* Resources */,
 			);
 			buildRules = (
 			);
@@ -132,46 +198,46 @@
 			);
 			name = PebbleAuthenticator;
 			productName = PebbleAuthenticator;
-			productReference = A01EDA6C1A18054600F152CE /* PebbleAuthenticator.app */;
+			productReference = A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A01EDA831A18054600F152CE /* PebbleAuthenticatorTests */ = {
+		A01EDAE51A1808F500F152CE /* PebbleAuthenticatorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A01EDA911A18054600F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */;
+			buildConfigurationList = A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */;
 			buildPhases = (
-				A01EDA801A18054600F152CE /* Sources */,
-				A01EDA811A18054600F152CE /* Frameworks */,
-				A01EDA821A18054600F152CE /* Resources */,
+				A01EDAE21A1808F500F152CE /* Sources */,
+				A01EDAE31A1808F500F152CE /* Frameworks */,
+				A01EDAE41A1808F500F152CE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A01EDA861A18054600F152CE /* PBXTargetDependency */,
+				A01EDAE81A1808F500F152CE /* PBXTargetDependency */,
 			);
 			name = PebbleAuthenticatorTests;
 			productName = PebbleAuthenticatorTests;
-			productReference = A01EDA841A18054600F152CE /* PebbleAuthenticatorTests.xctest */;
+			productReference = A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A01EDA641A18054500F152CE /* Project object */ = {
+		A01EDAC61A1808F500F152CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = Drillionaires;
+				ORGANIZATIONNAME = CryptoKnights;
 				TargetAttributes = {
-					A01EDA6B1A18054500F152CE = {
+					A01EDACD1A1808F500F152CE = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					A01EDA831A18054600F152CE = {
+					A01EDAE51A1808F500F152CE = {
 						CreatedOnToolsVersion = 6.1;
-						TestTargetID = A01EDA6B1A18054500F152CE;
+						TestTargetID = A01EDACD1A1808F500F152CE;
 					};
 				};
 			};
-			buildConfigurationList = A01EDA671A18054500F152CE /* Build configuration list for PBXProject "PebbleAuthenticator" */;
+			buildConfigurationList = A01EDAC91A1808F500F152CE /* Build configuration list for PBXProject "PebbleAuthenticator" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -179,29 +245,29 @@
 				en,
 				Base,
 			);
-			mainGroup = A01EDA631A18054500F152CE;
-			productRefGroup = A01EDA6D1A18054600F152CE /* Products */;
+			mainGroup = A01EDAC51A1808F500F152CE;
+			productRefGroup = A01EDACF1A1808F500F152CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A01EDA6B1A18054500F152CE /* PebbleAuthenticator */,
-				A01EDA831A18054600F152CE /* PebbleAuthenticatorTests */,
+				A01EDACD1A1808F500F152CE /* PebbleAuthenticator */,
+				A01EDAE51A1808F500F152CE /* PebbleAuthenticatorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A01EDA6A1A18054500F152CE /* Resources */ = {
+		A01EDACC1A1808F500F152CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01EDA7A1A18054600F152CE /* Main.storyboard in Resources */,
-				A01EDA7F1A18054600F152CE /* LaunchScreen.xib in Resources */,
-				A01EDA7C1A18054600F152CE /* Images.xcassets in Resources */,
+				A01EDADC1A1808F500F152CE /* Main.storyboard in Resources */,
+				A01EDAE11A1808F500F152CE /* LaunchScreen.xib in Resources */,
+				A01EDADE1A1808F500F152CE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A01EDA821A18054600F152CE /* Resources */ = {
+		A01EDAE41A1808F500F152CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,47 +277,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A01EDA681A18054500F152CE /* Sources */ = {
+		A01EDACA1A1808F500F152CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01EDA771A18054600F152CE /* ViewController.swift in Sources */,
-				A01EDA751A18054600F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */,
-				A01EDA721A18054600F152CE /* AppDelegate.swift in Sources */,
+				A01253801A181511006F0E83 /* Account.swift in Sources */,
+				A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */,
+				A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */,
+				A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */,
+				A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A01EDA801A18054600F152CE /* Sources */ = {
+		A01EDAE21A1808F500F152CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01EDA8B1A18054600F152CE /* PebbleAuthenticatorTests.swift in Sources */,
+				A01EDAED1A1808F500F152CE /* PebbleAuthenticatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A01EDA861A18054600F152CE /* PBXTargetDependency */ = {
+		A01EDAE81A1808F500F152CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A01EDA6B1A18054500F152CE /* PebbleAuthenticator */;
-			targetProxy = A01EDA851A18054600F152CE /* PBXContainerItemProxy */;
+			target = A01EDACD1A1808F500F152CE /* PebbleAuthenticator */;
+			targetProxy = A01EDAE71A1808F500F152CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A01EDA781A18054600F152CE /* Main.storyboard */ = {
+		A01EDADA1A1808F500F152CE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A01EDA791A18054600F152CE /* Base */,
+				A01EDADB1A1808F500F152CE /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A01EDA7D1A18054600F152CE /* LaunchScreen.xib */ = {
+		A01EDADF1A1808F500F152CE /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A01EDA7E1A18054600F152CE /* Base */,
+				A01EDAE01A1808F500F152CE /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -259,7 +327,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A01EDA8C1A18054600F152CE /* Debug */ = {
+		A01EDAEE1A1808F500F152CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,7 +369,7 @@
 			};
 			name = Debug;
 		};
-		A01EDA8D1A18054600F152CE /* Release */ = {
+		A01EDAEF1A1808F500F152CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -336,27 +404,37 @@
 			};
 			name = Release;
 		};
-		A01EDA8F1A18054600F152CE /* Debug */ = {
+		A01EDAF11A1808F500F152CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PebbleAuthenticator",
+				);
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		A01EDA901A18054600F152CE /* Release */ = {
+		A01EDAF21A1808F500F152CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PebbleAuthenticator",
+				);
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		A01EDA921A18054600F152CE /* Debug */ = {
+		A01EDAF41A1808F500F152CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -375,7 +453,7 @@
 			};
 			name = Debug;
 		};
-		A01EDA931A18054600F152CE /* Release */ = {
+		A01EDAF51A1808F500F152CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -393,45 +471,47 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A01EDA671A18054500F152CE /* Build configuration list for PBXProject "PebbleAuthenticator" */ = {
+		A01EDAC91A1808F500F152CE /* Build configuration list for PBXProject "PebbleAuthenticator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A01EDA8C1A18054600F152CE /* Debug */,
-				A01EDA8D1A18054600F152CE /* Release */,
+				A01EDAEE1A1808F500F152CE /* Debug */,
+				A01EDAEF1A1808F500F152CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A01EDA8E1A18054600F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */ = {
+		A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A01EDA8F1A18054600F152CE /* Debug */,
-				A01EDA901A18054600F152CE /* Release */,
+				A01EDAF11A1808F500F152CE /* Debug */,
+				A01EDAF21A1808F500F152CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		A01EDA911A18054600F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */ = {
+		A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A01EDA921A18054600F152CE /* Debug */,
-				A01EDA931A18054600F152CE /* Release */,
+				A01EDAF41A1808F500F152CE /* Debug */,
+				A01EDAF51A1808F500F152CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		A01EDA731A18054600F152CE /* PebbleAuthenticator.xcdatamodeld */ = {
+		A01EDAD51A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				A01EDA741A18054600F152CE /* PebbleAuthenticator.xcdatamodel */,
+				A01EDAD61A1808F500F152CE /* PebbleAuthenticator.xcdatamodel */,
 			);
-			currentVersion = A01EDA741A18054600F152CE /* PebbleAuthenticator.xcdatamodel */;
+			currentVersion = A01EDAD61A1808F500F152CE /* PebbleAuthenticator.xcdatamodel */;
 			path = PebbleAuthenticator.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = A01EDA641A18054500F152CE /* Project object */;
+	rootObject = A01EDAC61A1808F500F152CE /* Project object */;
 }

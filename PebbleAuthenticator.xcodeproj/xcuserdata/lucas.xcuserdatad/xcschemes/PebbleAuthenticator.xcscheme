@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A01EDA6B1A18054500F152CE"
+               BlueprintIdentifier = "A01EDACD1A1808F500F152CE"
                BuildableName = "PebbleAuthenticator.app"
                BlueprintName = "PebbleAuthenticator"
                ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A01EDA831A18054600F152CE"
+               BlueprintIdentifier = "A01EDAE51A1808F500F152CE"
                BuildableName = "PebbleAuthenticatorTests.xctest"
                BlueprintName = "PebbleAuthenticatorTests"
                ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A01EDA831A18054600F152CE"
+               BlueprintIdentifier = "A01EDAE51A1808F500F152CE"
                BuildableName = "PebbleAuthenticatorTests.xctest"
                BlueprintName = "PebbleAuthenticatorTests"
                ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A01EDA6B1A18054500F152CE"
+            BlueprintIdentifier = "A01EDACD1A1808F500F152CE"
             BuildableName = "PebbleAuthenticator.app"
             BlueprintName = "PebbleAuthenticator"
             ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A01EDA6B1A18054500F152CE"
+            BlueprintIdentifier = "A01EDACD1A1808F500F152CE"
             BuildableName = "PebbleAuthenticator.app"
             BlueprintName = "PebbleAuthenticator"
             ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A01EDA6B1A18054500F152CE"
+            BlueprintIdentifier = "A01EDACD1A1808F500F152CE"
             BuildableName = "PebbleAuthenticator.app"
             BlueprintName = "PebbleAuthenticator"
             ReferencedContainer = "container:PebbleAuthenticator.xcodeproj">

@@ -3,7 +3,7 @@
 //  PebbleAuthenticatorTests
 //
 //  Created by Lucas David on 11/15/14.
-//  Copyright (c) 2014 Drillionaires. All rights reserved.
+//  Copyright (c) 2014 CryptoKnights. All rights reserved.
 //
 
 import UIKit
