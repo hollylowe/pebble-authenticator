@@ -29,7 +29,7 @@
                     <navigationItem key="navigationItem" title="Accounts" id="RcT-SJ-Z03">
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="Xco-6L-WMP">
                             <connections>
-                                <segue destination="4uj-R3-EfR" kind="presentation" id="6e5-nD-k1j"/>
+                                <segue destination="4uj-R3-EfR" kind="presentation" identifier="MainToAddAccountSegue" id="6e5-nD-k1j"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -117,6 +117,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="keyTextfield" destination="SHX-Lu-q8K" id="XBc-g7-ced"/>
+                        <outlet property="nameTextfield" destination="195-zs-xWa" id="PS2-fM-MPq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbm-TE-Dky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

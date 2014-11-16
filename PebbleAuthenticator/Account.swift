@@ -7,3 +7,55 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
+
+@objc(Account)
+class Account: NSManagedObject {
+    @NSManaged var name : NSString
+    @NSManaged var timeBasedKey : NSString
+    
+
+    
+    class func createNewAccount(newName: String, newTimeBasedKey: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedContext = appDelegate.managedObjectContext {
+            if let entity = NSEntityDescription.entityForName("Account",
+                inManagedObjectContext: managedContext) {
+                    let newAccount = NSManagedObject(entity: entity,
+                        insertIntoManagedObjectContext: managedContext)
+                    
+                    newAccount.setValue(newName, forKey: "name")
+                    newAccount.setValue(newTimeBasedKey, forKey: "timeBasedKey")
+                    
+                    var error: NSError?
+                    if !managedContext.save(&error) {
+                        println("Could not create new account: \(error)")
+                    }
+            } else {
+                println("Could not create new account: No entity description.")
+            }
+        } else {
+            println("Could not create new account: No managed context.")
+        }
+        
+    }
+    
+    class func fetchAllAccounts() -> [Account] {
+        var resultAccounts = Array<Account>()
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName: "Account")
+        
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as  [Account]?
+        
+        if let results = fetchedResults {
+            resultAccounts = results
+        } else {
+            println("Could not fetch Accounts: \(error)")
+        }
+        
+        return resultAccounts
+    }
+}

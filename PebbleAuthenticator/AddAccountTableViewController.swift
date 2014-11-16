@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 class AddAccountTableViewController: UITableViewController {
+    // Implicit - set by previous view controller
+    var delegate: MainTableViewController!
+    
+    @IBOutlet weak var nameTextfield: UITextField!
+    @IBOutlet weak var keyTextfield: UITextField!
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -17,6 +22,11 @@ class AddAccountTableViewController: UITableViewController {
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         // Save the account
+        Account.createNewAccount(nameTextfield.text, newTimeBasedKey: keyTextfield.text)
+        // Send to pebble?
+        
+        // reload table view
+        self.delegate.reloadTableView()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
