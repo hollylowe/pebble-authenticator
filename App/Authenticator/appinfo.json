@@ -1,0 +1,17 @@
+{
+  "uuid": "948c0711-3ce6-4d6b-b1c9-60c1eaf781b3",
+  "shortName": "Authenticator",
+  "longName": "Authenticator",
+  "companyName": "MakeAwesomeHappen",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
