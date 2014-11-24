@@ -23,6 +23,7 @@
 		A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB001A180A5200F152CE /* CoreMotion.framework */; };
 		A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB021A180A5D00F152CE /* MessageUI.framework */; };
 		A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */; };
+		A0F4F4BC1A23DDCF00809643 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		A01EDB001A180A5200F152CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A01EDB021A180A5D00F152CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
+		A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		A01EDAC51A1808F500F152CE = {
 			isa = PBXGroup;
 			children = (
+				A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */,
 				A01EDAD01A1808F500F152CE /* PebbleAuthenticator */,
 				A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */,
 				A01EDACF1A1808F500F152CE /* Products */,
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F4F4BC1A23DDCF00809643 /* Entitlements.plist in Resources */,
 				A01EDADC1A1808F500F152CE /* Main.storyboard in Resources */,
 				A01EDAE11A1808F500F152CE /* LaunchScreen.xib in Resources */,
 				A01EDADE1A1808F500F152CE /* Images.xcassets in Resources */,
@@ -408,6 +412,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PebbleAuthenticator",
@@ -423,6 +430,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PebbleAuthenticator",
@@ -438,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -457,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
