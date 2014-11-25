@@ -13,6 +13,8 @@ class AddAccountTableViewController: UITableViewController {
     // Implicit - set by previous view controller
     var delegate: MainTableViewController!
     
+
+
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var keyTextfield: UITextField!
     
@@ -22,10 +24,20 @@ class AddAccountTableViewController: UITableViewController {
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         // Save the account
-        Account.createNewAccount(nameTextfield.text, newTimeBasedKey: keyTextfield.text)
-        // Send to pebble?
+        let name = nameTextfield.text
+        let key = keyTextfield.text
         
-        // reload table view
+        if let newAccount = Account.createNewAccount(name, newTimeBasedKey: key) {
+            // Send to pebble
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+           
+            let accountURL = newAccount.objectID.URIRepresentation()
+            let accountID = accountURL.lastPathComponent
+            
+            appDelegate.sendDataToWatch(accountID, accountName: name, accountKey: key, shouldDelete: false)
+        }
+        
         self.delegate.reloadTableView()
         self.dismissViewControllerAnimated(true, completion: nil)
     }

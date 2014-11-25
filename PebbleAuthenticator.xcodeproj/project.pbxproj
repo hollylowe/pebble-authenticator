@@ -23,6 +23,8 @@
 		A01EDB011A180A5200F152CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB001A180A5200F152CE /* CoreMotion.framework */; };
 		A01EDB031A180A5D00F152CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01EDB021A180A5D00F152CE /* MessageUI.framework */; };
 		A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */; };
+		A04313641A24173700663540 /* AccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04313631A24173700663540 /* AccountDetailViewController.swift */; };
+		A04313661A24379200663540 /* EditAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04313651A24379200663540 /* EditAccountTableViewController.swift */; };
 		A0F4F4BC1A23DDCF00809643 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,9 @@
 		A01EDB001A180A5200F152CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A01EDB021A180A5D00F152CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewController.swift; sourceTree = "<group>"; };
+		A04313601A2413F300663540 /* PebbleAuthenticator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PebbleAuthenticator-Bridging-Header.h"; sourceTree = "<group>"; };
+		A04313631A24173700663540 /* AccountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailViewController.swift; sourceTree = "<group>"; };
+		A04313651A24379200663540 /* EditAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAccountTableViewController.swift; sourceTree = "<group>"; };
 		A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +102,7 @@
 		A01EDAC51A1808F500F152CE = {
 			isa = PBXGroup;
 			children = (
+				A04313601A2413F300663540 /* PebbleAuthenticator-Bridging-Header.h */,
 				A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */,
 				A01EDAD01A1808F500F152CE /* PebbleAuthenticator */,
 				A01EDAE91A1808F500F152CE /* PebbleAuthenticatorTests */,
@@ -180,6 +186,8 @@
 			children = (
 				A01EDAD81A1808F500F152CE /* MainTableViewController.swift */,
 				A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */,
+				A04313631A24173700663540 /* AccountDetailViewController.swift */,
+				A04313651A24379200663540 /* EditAccountTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +296,8 @@
 				A01253801A181511006F0E83 /* Account.swift in Sources */,
 				A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */,
 				A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */,
+				A04313661A24379200663540 /* EditAccountTableViewController.swift in Sources */,
+				A04313641A24173700663540 /* AccountDetailViewController.swift in Sources */,
 				A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */,
 				A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */,
 			);
@@ -412,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "-";
@@ -423,6 +434,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PebbleAuthenticator-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -430,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -440,6 +454,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PebbleAuthenticator-Bridging-Header.h";
 			};
 			name = Release;
 		};

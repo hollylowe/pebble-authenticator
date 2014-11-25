@@ -10,13 +10,74 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
 
     var window: UIWindow?
+    var targetWatch: PBWatch?
 
+    let accountUniqueIDIndex = 0
+    let accountNameIndex = 1
+    let accountKeyIndex = 2
+    let accountDeleteIndex = 4
+    let unixTimeStampIndex = 9
+    
+    func onSent(watch: PBWatch!, dictionary: [NSObject : AnyObject]!, error: NSError!) {
+        if error == nil {
+            println("Update sent!")
+        } else {
+            println("Error: \(error)")
+        }
+    }
+    
+    func sendDataToWatch(accountID: String, accountName: String, accountKey: String, shouldDelete: Bool) {
+        if let watch = targetWatch {
+            if watch.connected == false {
+                println("Not connected.")
+            } else {
+                let unixTimeStamp = NSDate().timeIntervalSince1970
 
+                let update = [
+                    accountUniqueIDIndex : accountID,
+                    accountNameIndex: accountName,
+                    accountKeyIndex: accountKey,
+                    accountDeleteIndex: shouldDelete.description,
+                    unixTimeStampIndex: unixTimeStamp.description
+                ]
+                
+                let updateDict = update as NSDictionary
+                
+                println("Sending dictionary:")
+                println(" \(updateDict)")
+                
+                watch.appMessagesPushUpdate(updateDict, onSent: onSent)
+                
+            }
+            
+        }
+    }
+    
+    func setTargetWatch(watch: PBWatch) {
+        self.targetWatch = watch
+        // Configure our communications channel to target the weather app:
+        // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definition on the watch's end:
+        // For Pebras (testing stuff out): 
+        var bytes: [UInt8] = [0x79, 0x68, 0xb8, 0x07, 0x8d, 0x6d, 0x4a, 0xb9, 0xa8, 0x79, 0xc5, 0xa8, 0x21, 0x6e, 0x8a, 0x64]
+        // For Authenticator:
+        // var bytes: [UInt8] = [0x94, 0x8c, 0x07, 0x11, 0x3c, 0xe6, 0x4d, 0x6b, 0xb1, 0xc9, 0x60, 0xc1, 0xea, 0xf7, 0x81, 0xb3]
+        var uuid: NSData = NSData(bytes: bytes, length: bytes.count * sizeof(UInt8))
+        
+        PBPebbleCentral.defaultCentral().appUUID = uuid;
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // We'd like to get called when Pebbles connect and disconnect, so become the delegate of PBPebbleCentral:
+        PBPebbleCentral.defaultCentral().delegate = self;
+        
+        // Initialize with the last connected watch:
+        self.setTargetWatch(PBPebbleCentral.defaultCentral().lastConnectedWatch())
+        
         return true
     }
 
@@ -107,5 +168,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+}
+
+extension AppDelegate: PBPebbleCentralDelegate {
+    func pebbleCentral(central: PBPebbleCentral!, watchDidConnect watch: PBWatch!, isNew: Bool) {
+        
+    }
+    
+    func pebbleCentral(central: PBPebbleCentral!, watchDidDisconnect watch: PBWatch!) {
+        
+    }
 }
 

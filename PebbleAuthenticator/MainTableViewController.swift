@@ -11,6 +11,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
     var accounts = Array<Account>()
     let mainToAddAccountSegueIdentifier = "MainToAddAccountSegue"
+    let mainToAccountDetailSegueIdentifier = "MainToAccountDetailSegue"
     
     override func viewDidLoad() {
         accounts = Account.fetchAllAccounts()
@@ -34,6 +35,11 @@ class MainTableViewController: UITableViewController {
             let viewControllers = navigationController.viewControllers
             let addAccountViewController = viewControllers[0] as AddAccountTableViewController
             addAccountViewController.delegate = self
+        } else if segue.identifier == mainToAccountDetailSegueIdentifier {
+            let accountDetailViewController = segue.destinationViewController as AccountDetailViewController
+            accountDetailViewController.delegate = self
+            accountDetailViewController.account = sender as Account
+            accountDetailViewController.title = (sender as Account).name
         }
         
         super.prepareForSegue(segue, sender: sender)
@@ -43,10 +49,17 @@ class MainTableViewController: UITableViewController {
         self.tableView.beginUpdates()
         
         let account = accounts[indexPath.row]
-        
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let accountURL = account.objectID.URIRepresentation()
+        let accountID = accountURL.lastPathComponent
+        
+        
+        // Delete from core data
         if let context = appDelegate.managedObjectContext {
-           context.deleteObject(account)
+            // Delete from watch
+            appDelegate.sendDataToWatch(accountID, accountName: account.name, accountKey: account.timeBasedKey, shouldDelete: true)
+
+            context.deleteObject(account)
         }
         appDelegate.saveContext()
         
@@ -56,6 +69,8 @@ class MainTableViewController: UITableViewController {
         
         self.tableView.endUpdates()
     }
+    
+    
 }
 
 extension MainTableViewController: UITableViewDelegate {
@@ -73,13 +88,21 @@ extension MainTableViewController: UITableViewDelegate {
 
 extension MainTableViewController: UITableViewDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("AccountCellIdentifier") as UITableViewCell
+        
         let account = accounts[indexPath.row]
         cell.textLabel.text = account.valueForKey("name") as String!
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accounts.count
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let account = accounts[indexPath.row]
+        
+        self.performSegueWithIdentifier(mainToAccountDetailSegueIdentifier, sender: account)
     }
 }

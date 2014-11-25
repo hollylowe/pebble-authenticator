@@ -15,8 +15,31 @@ class Account: NSManagedObject {
     @NSManaged var name : NSString
     @NSManaged var timeBasedKey : NSString
     
-    class func createNewAccount(newName: String, newTimeBasedKey: String) {
+    func setAndSaveName(newName: String) {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedContext = appDelegate.managedObjectContext {
+            self.name = newName
+            var error: NSError?
+            if !managedContext.save(&error) {
+                println("Could not edit account: \(error)")
+            }
+        }
+    }
+    
+    func setAndSaveTimeBasedKey(newKey: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedContext = appDelegate.managedObjectContext {
+            self.timeBasedKey = newKey
+            var error: NSError?
+            if !managedContext.save(&error) {
+                println("Could not edit account: \(error)")
+            }
+        }
+    }
+    
+    class func createNewAccount(newName: String, newTimeBasedKey: String) -> NSManagedObject? {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var resultAccount: NSManagedObject?
         if let managedContext = appDelegate.managedObjectContext {
             if let entity = NSEntityDescription.entityForName("Account",
                 inManagedObjectContext: managedContext) {
@@ -29,6 +52,8 @@ class Account: NSManagedObject {
                     var error: NSError?
                     if !managedContext.save(&error) {
                         println("Could not create new account: \(error)")
+                    } else {
+                        resultAccount = newAccount
                     }
             } else {
                 println("Could not create new account: No entity description.")
@@ -37,6 +62,7 @@ class Account: NSManagedObject {
             println("Could not create new account: No managed context.")
         }
         
+        return resultAccount
     }
     
     class func fetchAllAccounts() -> [Account] {
