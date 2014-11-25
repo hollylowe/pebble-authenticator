@@ -5,86 +5,18 @@
 Window *window;
 TextLayer *text_layer;
 
-static AppSync sync;
-static uint8_t sync_buffer[256];
-
-enum DictionaryIndices {
-  ACCOUNT_UNIQUE_ID_INDEX = 0,
-  ACCOUNT_NAME_INDEX = 1,
-  ACCOUNT_TIME_BASED_KEY_INDEX = 2,
-  ACCOUNT_DELETE_INDEX = 4,
-  EPOCH_TIME_STAMP_GMT_INDEX = 9      // TUPLE_CSTRING
-};
-
-static void sync_error_callback(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "App Message Sync Error: %d", app_message_error);
-}
-
-static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tuple, const Tuple* old_tuple, void* context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "value: %s", new_tuple->value->cstring);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "key: %d", (uint8_t) key);
-
-  text_layer_set_text(text_layer, "hello");
-
-  switch (key) {
-    case ACCOUNT_UNIQUE_ID_INDEX:
-        text_layer_set_text(text_layer, new_tuple->value->cstring);
-        break;
-    case ACCOUNT_NAME_INDEX:
-        text_layer_set_text(text_layer, new_tuple->value->cstring);
-        break;
-    case ACCOUNT_TIME_BASED_KEY_INDEX:
-        text_layer_set_text(text_layer, new_tuple->value->cstring);
-        break;
-    case ACCOUNT_DELETE_INDEX: 
-        // the value is the account to delete
-        text_layer_set_text(text_layer, new_tuple->value->cstring);
-        break;
-    case EPOCH_TIME_STAMP_GMT_INDEX:
-        // double epoch = new_tuple->value->uint8;
-        // text_layer_set_text(text_layer, epoch);
-        break;
-  }
-}
-
-static void window_load(Window *window) {
+void handle_init(char *str) {
+    // Create a window and text layer
+    window = window_create();
     text_layer = text_layer_create(GRect(0, 0, 144, 154));
     
     // Set the text, font, and text alignment
-    text_layer_set_text(text_layer, "hello");
+    text_layer_set_text(text_layer, str);
     text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
     text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-    text_layer_set_overflow_mode(text_layer, GTextOverflowModeWordWrap);
-
-    Tuplet initial_values[] = {
-        TupletCString(ACCOUNT_UNIQUE_ID_INDEX, "accountID"),
-        TupletCString(ACCOUNT_NAME_INDEX, "accountName"),
-        TupletCString(ACCOUNT_TIME_BASED_KEY_INDEX, "accountKey"),
-        TupletCString(ACCOUNT_DELETE_INDEX, "accountDelete"),
-        TupletCString(EPOCH_TIME_STAMP_GMT_INDEX, "epoch")
-    };
-    app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
-        sync_tuple_changed_callback, sync_error_callback, NULL);
-
-      // Add the text layer to the window
+    
+    // Add the text layer to the window
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(text_layer));
-}
-
-static void window_unload(Window *window) {
-    app_sync_deinit(&sync); 
-}
-
-void handle_init() {
-    // Create a window and text layer
-    window = window_create();
-    window_set_window_handlers(window, (WindowHandlers) {
-        .load = window_load,
-        .unload = window_unload
-    });
-
-    const int inbound_size = app_message_inbox_size_maximum();
-    const int outbound_size = app_message_outbox_size_maximum();
-    app_message_open(inbound_size, outbound_size);
 
     // Push the window
     window_stack_push(window, true);
@@ -380,8 +312,7 @@ int main(void) {
   printf("%s\n", str);
   printf("Time: %d\n", intervals());
   
-    handle_init();
-    text_layer_set_text(text_layer, str);
+    handle_init(str);
     app_event_loop();
     handle_deinit();
 }
