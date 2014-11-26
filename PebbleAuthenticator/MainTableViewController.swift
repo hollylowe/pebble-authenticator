@@ -8,13 +8,32 @@
 
 import UIKit
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController, WatchSenderDelegate {
     var accounts = Array<Account>()
     let mainToAddAccountSegueIdentifier = "MainToAddAccountSegue"
     let mainToAccountDetailSegueIdentifier = "MainToAccountDetailSegue"
+    var lastDeleteIndexPath: NSIndexPath?
+    
+    func watchSendFailure() {
+        var alert = UIAlertController(
+            title: "Error",
+            message: "Unable to delete account from watch.",
+            preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func watchSendSuccessful() {
+        if let indexPath = lastDeleteIndexPath {
+            deleteAccount(indexPath)
+            lastDeleteIndexPath = nil
+        }
+    }
     
     override func viewDidLoad() {
         accounts = Account.fetchAllAccounts()
+        self.tableView.tableFooterView = UIView()
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -45,29 +64,33 @@ class MainTableViewController: UITableViewController {
         super.prepareForSegue(segue, sender: sender)
     }
 
-    func deleteAccountRowAction(rowAction: UITableViewRowAction!, indexPath: NSIndexPath!) {
-        self.tableView.beginUpdates()
-        
+    func deleteAccount(indexPath: NSIndexPath) {
         let account = accounts[indexPath.row]
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let accountURL = account.objectID.URIRepresentation()
-        let accountID = accountURL.lastPathComponent
-        
-        
+
+        self.tableView.beginUpdates()
+
         // Delete from core data
         if let context = appDelegate.managedObjectContext {
-            // Delete from watch
-            appDelegate.sendDataToWatch(accountID, accountName: account.name, accountKey: account.timeBasedKey, shouldDelete: true)
-
             context.deleteObject(account)
         }
         appDelegate.saveContext()
-        
         accounts = Account.fetchAllAccounts()
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         
         
         self.tableView.endUpdates()
+    }
+    
+    func deleteAccountRowAction(rowAction: UITableViewRowAction!, indexPath: NSIndexPath!) {
+        
+        lastDeleteIndexPath = indexPath
+        let account = accounts[indexPath.row]
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let accountURL = account.objectID.URIRepresentation()
+        let accountID = accountURL.lastPathComponent
+        appDelegate.sendDataToWatch(accountID, accountName: account.name, accountKey: account.timeBasedKey, shouldDelete: true, lastDelegate: self)
+        
     }
     
     
@@ -88,11 +111,13 @@ extension MainTableViewController: UITableViewDelegate {
 
 extension MainTableViewController: UITableViewDataSource {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AccountCellIdentifier") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("AccountCellIdentifier") as AccountCell
         
         let account = accounts[indexPath.row]
-        cell.textLabel.text = account.valueForKey("name") as String!
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let name = account.valueForKey("name") as String!
+        let key = account.valueForKey("timeBasedKey") as String!
+        
+        cell.setName(name, andKey: key)
         return cell
     }
     

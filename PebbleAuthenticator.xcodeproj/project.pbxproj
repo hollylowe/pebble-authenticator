@@ -25,6 +25,10 @@
 		A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */; };
 		A04313641A24173700663540 /* AccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04313631A24173700663540 /* AccountDetailViewController.swift */; };
 		A04313661A24379200663540 /* EditAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04313651A24379200663540 /* EditAccountTableViewController.swift */; };
+		A0CA2F541A25227C00D12218 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA2F531A25227C00D12218 /* AccountCell.swift */; };
+		A0CA2F561A2528F000D12218 /* WatchSenderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA2F551A2528F000D12218 /* WatchSenderDelegate.swift */; };
+		A0CA2F581A25340900D12218 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA2F571A25340900D12218 /* MainTabBarController.swift */; };
+		A0CA2F5A1A253A0700D12218 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA2F591A253A0700D12218 /* SettingsTableViewController.swift */; };
 		A0F4F4BC1A23DDCF00809643 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +66,10 @@
 		A04313601A2413F300663540 /* PebbleAuthenticator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PebbleAuthenticator-Bridging-Header.h"; sourceTree = "<group>"; };
 		A04313631A24173700663540 /* AccountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailViewController.swift; sourceTree = "<group>"; };
 		A04313651A24379200663540 /* EditAccountTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAccountTableViewController.swift; sourceTree = "<group>"; };
+		A0CA2F531A25227C00D12218 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
+		A0CA2F551A2528F000D12218 /* WatchSenderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSenderDelegate.swift; sourceTree = "<group>"; };
+		A0CA2F571A25340900D12218 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		A0CA2F591A253A0700D12218 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		A0F4F4BB1A23DDCF00809643 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +136,8 @@
 				A012537E1A1814ED006F0E83 /* Models */,
 				A01EDB0A1A18118300F152CE /* Controllers */,
 				A01EDAD11A1808F500F152CE /* Supporting Files */,
+				A0CA2F551A2528F000D12218 /* WatchSenderDelegate.swift */,
+				A0CA2F571A25340900D12218 /* MainTabBarController.swift */,
 			);
 			path = PebbleAuthenticator;
 			sourceTree = "<group>";
@@ -177,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				A01EDADA1A1808F500F152CE /* Main.storyboard */,
+				A0CA2F531A25227C00D12218 /* AccountCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -188,6 +199,7 @@
 				A01EDB0B1A18119200F152CE /* AddAccountTableViewController.swift */,
 				A04313631A24173700663540 /* AccountDetailViewController.swift */,
 				A04313651A24379200663540 /* EditAccountTableViewController.swift */,
+				A0CA2F591A253A0700D12218 /* SettingsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -294,11 +306,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A01253801A181511006F0E83 /* Account.swift in Sources */,
+				A0CA2F541A25227C00D12218 /* AccountCell.swift in Sources */,
+				A0CA2F581A25340900D12218 /* MainTabBarController.swift in Sources */,
+				A0CA2F5A1A253A0700D12218 /* SettingsTableViewController.swift in Sources */,
 				A01EDAD91A1808F500F152CE /* MainTableViewController.swift in Sources */,
 				A01EDAD71A1808F500F152CE /* PebbleAuthenticator.xcdatamodeld in Sources */,
 				A04313661A24379200663540 /* EditAccountTableViewController.swift in Sources */,
 				A04313641A24173700663540 /* AccountDetailViewController.swift in Sources */,
 				A01EDAD41A1808F500F152CE /* AppDelegate.swift in Sources */,
+				A0CA2F561A2528F000D12218 /* WatchSenderDelegate.swift in Sources */,
 				A01EDB0C1A18119200F152CE /* AddAccountTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

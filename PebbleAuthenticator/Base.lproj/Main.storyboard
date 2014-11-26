@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HB7-dW-6a5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gT7-59-Ba6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -9,16 +9,52 @@
         <scene sceneID="rw1-A0-v5g">
             <objects>
                 <tableViewController id="rdg-YQ-Rm4" customClass="MainTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XGd-GK-7H5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" id="XGd-GK-7H5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountCellIdentifier" id="Wh4-2s-DyC">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountCellIdentifier" rowHeight="82" id="Wh4-2s-DyC" customClass="AccountCell" customModule="PebbleAuthenticator" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wh4-2s-DyC" id="77N-GH-UL5">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shj-p2-kGy">
+                                            <rect key="frame" x="23" y="15" width="569" height="31.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="23"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Key" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qb-1T-ces">
+                                            <rect key="frame" x="23" y="45" width="569" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="top" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="1.5" id="5q3-1V-TDa"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="top" secondItem="77N-GH-UL5" secondAttribute="topMargin" id="8Yn-at-tsv"/>
+                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="top" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="1.5" id="AqT-wx-eOW"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="55" id="Omf-gQ-F7n"/>
+                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="trailing" secondItem="77N-GH-UL5" secondAttribute="trailingMargin" id="RdY-he-FLX"/>
+                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="leading" secondItem="77N-GH-UL5" secondAttribute="leadingMargin" constant="15" id="YZ0-jc-kXo"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="trailing" secondItem="77N-GH-UL5" secondAttribute="trailingMargin" id="ZP2-sq-LrA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3Qb-1T-ces" secondAttribute="bottom" constant="11.5" id="i7K-ZD-Ak6"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="top" secondItem="77N-GH-UL5" secondAttribute="topMargin" id="mFb-V7-M88"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="leading" secondItem="77N-GH-UL5" secondAttribute="leadingMargin" constant="15" id="uyT-jO-gGf"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="8Yn-at-tsv"/>
+                                            <exclude reference="Omf-gQ-F7n"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="accountKeyLabel" destination="3Qb-1T-ces" id="yEl-AJ-Emy"/>
+                                    <outlet property="accountNameLabel" destination="shj-p2-kGy" id="4NY-Cf-3aD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -39,7 +75,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvz-rK-ffy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1088" y="237"/>
+            <point key="canvasLocation" x="1954" y="237"/>
         </scene>
         <!--Add Account-->
         <scene sceneID="s6P-jl-leQ">
@@ -127,12 +163,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbm-TE-Dky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2771" y="237"/>
+            <point key="canvasLocation" x="3583" y="237"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Accounts-->
         <scene sceneID="Zk4-JY-pZ1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HB7-dW-6a5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Accounts" id="GSf-ML-uzR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DxS-ji-aWk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -145,7 +182,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNK-5e-zA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="237"/>
+            <point key="canvasLocation" x="1088" y="237"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oCe-hK-I2q">
@@ -163,7 +200,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mz-1h-2Im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1959" y="237"/>
+            <point key="canvasLocation" x="2771" y="237"/>
         </scene>
         <!--Account Detail View Controller-->
         <scene sceneID="Q3z-EH-5VQ">
@@ -215,7 +252,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60N-xc-hmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1959" y="983"/>
+            <point key="canvasLocation" x="2771" y="983"/>
         </scene>
         <!--Edit Account-->
         <scene sceneID="wjX-zD-XuQ">
@@ -303,7 +340,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7b2-vH-hTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="983"/>
+            <point key="canvasLocation" x="4307" y="983"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rUw-fB-KPI">
@@ -321,7 +358,93 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uum-nU-40x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2771" y="983"/>
+            <point key="canvasLocation" x="3583" y="983"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="Pzx-cG-krX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="gT7-59-Ba6" customClass="MainTabBarController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="RHJ-YU-BIi">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="HB7-dW-6a5" kind="relationship" relationship="viewControllers" id="2YV-gj-22J"/>
+                        <segue destination="bDY-6d-jO7" kind="relationship" relationship="viewControllers" id="28T-Z2-mRS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3A-UK-0JM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="237"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="mX9-KE-1UN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bDY-6d-jO7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="Cgd-Wj-9Ry"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sq5-6Z-yCk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kvw-go-akc" kind="relationship" relationship="rootViewController" id="C40-oU-sY7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ynj-i5-uSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088" y="962"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="joe-iI-sbu">
+            <objects>
+                <tableViewController id="kvw-go-akc" customClass="SettingsTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="5yS-FS-bpW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="996-LG-dMf">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Cc0-6X-sWV" detailTextLabel="DMh-43-Xps" style="IBUITableViewCellStyleValue1" id="XcN-8L-6Mu">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XcN-8L-6Mu" id="QNn-PE-JQC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cc0-6X-sWV">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DMh-43-Xps">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="kvw-go-akc" id="CKE-pw-9KG"/>
+                            <outlet property="delegate" destination="kvw-go-akc" id="ShV-Pr-gsi"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="2LU-Vk-9SU"/>
+                    <connections>
+                        <outlet property="connectedWatchCell" destination="XcN-8L-6Mu" id="uIr-oH-dGR"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hhQ-79-8Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1808" y="962"/>
         </scene>
     </scenes>
 </document>

@@ -8,18 +8,43 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class AddAccountTableViewController: UITableViewController {
+class AddAccountTableViewController: UITableViewController, WatchSenderDelegate {
     // Implicit - set by previous view controller
     var delegate: MainTableViewController!
+    var lastCreatedAccount: NSManagedObject?
     
-
-
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var keyTextfield: UITextField!
-    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func watchSendSuccessful() {
+        lastCreatedAccount = nil
+        self.delegate.reloadTableView()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func watchSendFailure() {
+        if let account = lastCreatedAccount {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            // Delete from core data
+            if let context = appDelegate.managedObjectContext {
+                context.deleteObject(account)
+            }
+            appDelegate.saveContext()
+            
+            // Show a status alert
+            var alert = UIAlertController(
+                title: "Error",
+                message: "Unable to add account to watch.",
+                preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
@@ -28,18 +53,20 @@ class AddAccountTableViewController: UITableViewController {
         let key = keyTextfield.text
         
         if let newAccount = Account.createNewAccount(name, newTimeBasedKey: key) {
-            // Send to pebble
-            
+            // Send to Pebble
+            lastCreatedAccount = newAccount
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-           
             let accountURL = newAccount.objectID.URIRepresentation()
             let accountID = accountURL.lastPathComponent
             
-            appDelegate.sendDataToWatch(accountID, accountName: name, accountKey: key, shouldDelete: false)
+            appDelegate.sendDataToWatch(
+                accountID,
+                accountName: name,
+                accountKey: key,
+                shouldDelete: false,
+                lastDelegate: self
+            )
         }
-        
-        self.delegate.reloadTableView()
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {

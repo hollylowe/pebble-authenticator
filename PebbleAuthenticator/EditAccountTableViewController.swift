@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EditAccountTableViewController: UITableViewController {
+class EditAccountTableViewController: UITableViewController, WatchSenderDelegate {
     let accountUniqueIDIndex = 0
     let accountNameIndex = 1
     let accountKeyIndex = 2
@@ -18,9 +18,29 @@ class EditAccountTableViewController: UITableViewController {
     var accountToEdit: Account!
     var delegate: AccountDetailViewController!
     
+    func watchSendSuccessful() {
+        let name = nameTextField.text
+        let key = keyTextField.text
+        // Save to core data
+        accountToEdit.setAndSaveName(name)
+        accountToEdit.setAndSaveTimeBasedKey(key)
+        self.delegate.updateAccountTextFieldsWithName(name, andKey: key)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func watchSendFailure() {
+        // Dont save to core data
+        // Show a status alert
+        var alert = UIAlertController(
+            title: "Error",
+            message: "Unable to edit account on watch.",
+            preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var keyTextField: UITextField!
-    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -28,21 +48,12 @@ class EditAccountTableViewController: UITableViewController {
     @IBAction func doneButtonTapped(sender: AnyObject) {
         let name = nameTextField.text
         let key = keyTextField.text
-        
-        accountToEdit.setAndSaveName(name)
-        accountToEdit.setAndSaveTimeBasedKey(key)
-        
-        self.delegate.updateAccountTextFieldsWithName(nameTextField.text, andKey: keyTextField.text)
-        
         // Send to pebble
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        
         let accountURL = accountToEdit.objectID.URIRepresentation()
         let accountID = accountURL.lastPathComponent
         
-        appDelegate.sendDataToWatch(accountID, accountName: name, accountKey: key, shouldDelete: false)
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+        appDelegate.sendDataToWatch(accountID, accountName: name, accountKey: key, shouldDelete: false, lastDelegate: self)
     }
     
     override func viewDidLoad() {

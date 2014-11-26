@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
 
     var window: UIWindow?
     var targetWatch: PBWatch?
-
+    var lastWatchSenderDelegate: WatchSenderDelegate?
+    
     let accountUniqueIDIndex = 0
     let accountNameIndex = 1
     let accountKeyIndex = 2
@@ -24,15 +25,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     func onSent(watch: PBWatch!, dictionary: [NSObject : AnyObject]!, error: NSError!) {
         if error == nil {
             println("Update sent!")
+            if let delegate = lastWatchSenderDelegate {
+                delegate.watchSendSuccessful()
+                lastWatchSenderDelegate = nil
+            }
         } else {
+            if let delegate = lastWatchSenderDelegate {
+                delegate.watchSendFailure()
+                lastWatchSenderDelegate = nil
+            }
             println("Error: \(error)")
         }
     }
     
-    func sendDataToWatch(accountID: String, accountName: String, accountKey: String, shouldDelete: Bool) {
+    func sendDataToWatch(accountID: String, accountName: String, accountKey: String, shouldDelete: Bool, lastDelegate: WatchSenderDelegate) {
+        lastWatchSenderDelegate = lastDelegate
         if let watch = targetWatch {
             if watch.connected == false {
-                println("Not connected.")
+                var alert = UIAlertController(
+                    title: "Error",
+                    message: "Watch is not connected",
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                if let window = self.window {
+                    if let root = window.rootViewController as? UINavigationController {
+                        root.visibleViewController.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
             } else {
                 let unixTimeStamp = NSDate().timeIntervalSince1970
 
@@ -58,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     
     func setTargetWatch(watch: PBWatch) {
         self.targetWatch = watch
+        
         // Configure our communications channel to target the weather app:
         // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definition on the watch's end:
         // For Pebras (testing stuff out): 
