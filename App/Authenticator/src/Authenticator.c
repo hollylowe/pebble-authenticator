@@ -1,6 +1,9 @@
 #include <pebble.h>
+#include <stdio.h>
+#include <stdlib.h>
   
 #define TIME_ZONE_OFFSET -8
+#define TEST_KEY "ylxxyp6aho7w7txfa662xcjdahvmctli"
 
 Window *window;
 TextLayer *text_layer;
@@ -11,7 +14,7 @@ void handle_init(char *str) {
     text_layer = text_layer_create(GRect(0, 0, 144, 154));
     
     // Set the text, font, and text alignment
-    text_layer_set_text(text_layer, str);
+    text_layer_set_text(text_layer, "Two-Step\nAuthenticator\n\nGmail\n1234 5678");
     text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
     text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
     
@@ -263,11 +266,12 @@ uint8_t hmacKey4[]={
     0xa0
 };
 
-void printHash(uint8_t* hash) {
+void printHash(uint8_t* hash, char *str) {
     int i;
   printf("First: %d\n", hash[0]);
     for (i=0; i<20; i++) {
         printf("%02x", hash[i]);
+        //sprintf((str + i), "%02x", hash[i]);
     }
     printf("\n");
 }
@@ -277,7 +281,8 @@ void decToHex(uint8_t *hash, char *str) {
     int temp = 0;
     int quo = 0;
     int num = 0;
-    for (i = 0; i < 40; i++) {
+    for (i = 0; i < 20; i++) {
+      printf("%d", hash[i]);
       num = (int)hash[i];
       quo = num;
       while (quo) {
@@ -296,21 +301,36 @@ void decToHex(uint8_t *hash, char *str) {
 
 /* NEED TO ADJUST FOR TIMEZONE! */
 int intervals(void) {
-    printf("%d\n", (int)time(NULL));
-    return 0;
+    //printf("%d\n", (int)time(NULL));
+    return (int)time(NULL) / 30;
 }
+
 
 /*************************************/
 int main(void) {
-  char *str = (char *)malloc(42);
-  sha1nfo s;
-  
-  sha1_init(&s);
-  sha1_write(&s, "abc", 3);
-  printHash(sha1_result(&s));
-  decToHex(sha1_result(&s), str);
-  printf("%s\n", str);
-  printf("Time: %d\n", intervals());
+    char *str = (char *)malloc(42);
+    sha1nfo s;
+    uint8_t *hash;
+    int time;
+    char sha1_time[8] = {0,0,0,0,0,0,0,0};
+
+    time = intervals();
+    printf("Time: %d\n", time);
+    sha1_time[4] = (time >> 24) & 0xFF;
+    sha1_time[5] = (time >> 16) & 0xFF;
+    sha1_time[6] = (time >> 8) & 0XFF;
+    sha1_time[7] = time & 0xFF;
+    printf("sha1_time: %s\n", sha1_time);
+    int i;
+    for (i = 0; i < 8; i++) {
+        printf("%d ", sha1_time[i]);
+    }    
+
+
+    sha1_initHmac(&s, hmacKey1, 64);
+    sha1_write(&s, "Sample #1", 9);
+    hash = sha1_resultHmac(&s);
+    printHash(hash, str);
   
     handle_init(str);
     app_event_loop();
