@@ -15,7 +15,7 @@ void handle_init(char *str) {
     text_layer = text_layer_create(GRect(0, 0, 144, 154));
     
     // Set the text, font, and text alignment
-    text_layer_set_text(text_layer, "Two-Step\nAuthenticator\n\nGmail\n1234 5678");
+    text_layer_set_text(text_layer, str);
     text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
     text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
     
@@ -74,12 +74,16 @@ int main(void) {
 	'H', 'e', 'l', 'l', 'o', '!', 0xDE, 0xAD, 0xBE, 0xEF
 	};
 
+    static char tokenText[] = "TESTIN";
 
     char *str = (char *)malloc(42);
     sha1nfo s;
     uint8_t *hash;
     int time;
     char sha1_time[8] = {0,0,0,0,0,0,0,0};
+    uint8_t ofs;
+    uint32_t otp;
+
 
     time = intervals();
     printf("Time: %d\n", time);
@@ -94,12 +98,37 @@ int main(void) {
     }    
 
 
-    sha1_initHmac(&s, sha1_key, 64);
-    sha1_write(&s, "Sample #1", 9);
+    sha1_initHmac(&s, sha1_key, 10);
+    sha1_write(&s, sha1_time, 8);
     hash = sha1_resultHmac(&s);
     printHash(hash, str);
-  
-    handle_init(str);
+
+    ofs = s.state.b[19] & 0xf;
+    otp = 0;
+otp = ((s.state.b[ofs] & 0x7f) << 24) |
+		((s.state.b[ofs + 1] & 0xff) << 16) |
+		((s.state.b[ofs + 2] & 0xff) << 8) |
+		(s.state.b[ofs + 3] & 0xff);
+	otp %= DIGITS_TRUNCATE;
+	
+	// Convert result into a string.  Sure wish we had working snprintf...
+	for(i = 0; i < 6; i++) {
+		tokenText[5-i] = 0x30 + (otp % 10);
+		otp /= 10;
+	}
+	tokenText[6]=0;
+
+    printf("Result: %c%c%c%c%c%c\n", 
+        tokenText[0],
+        tokenText[1],
+        tokenText[2],
+        tokenText[3],
+        tokenText[4],
+        tokenText[5]);
+
+     
+ 
+    handle_init(tokenText);
     app_event_loop();
     handle_deinit();
 }

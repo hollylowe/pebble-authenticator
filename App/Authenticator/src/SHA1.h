@@ -1,9 +1,21 @@
 #define HASH_LENGTH 20
 #define BLOCK_LENGTH 64
+#define DIGITS_TRUNCATE 1000000
+
+
+union _buffer {
+	uint8_t b[BLOCK_LENGTH];
+	uint32_t w[BLOCK_LENGTH/4];
+};
+
+union _state {
+	uint8_t b[HASH_LENGTH];
+	uint32_t w[HASH_LENGTH/4];
+};
 
 typedef struct sha1nfo {
-    uint32_t buffer[BLOCK_LENGTH/4];
-    uint32_t state[HASH_LENGTH/4];
+    union _buffer buffer;
+    union _state state;
     uint32_t byteCount;
     uint8_t bufferOffset;
     uint8_t keyBuffer[BLOCK_LENGTH];
