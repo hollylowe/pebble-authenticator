@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     var targetWatch: PBWatch?
     var lastWatchSenderDelegate: WatchSenderDelegate?
     
-    let accountUniqueIDIndex = 0
-    let accountNameIndex = 1
-    let accountKeyIndex = 2
-    let accountDeleteIndex = 4
-    let unixTimeStampIndex = 9
+    // let accountUniqueIDIndex = 0
+    let accountNameIndex = 0
+    let accountKeyIndex = 1
+    //let accountDeleteIndex = 4
+    //let unixTimeStampIndex = 9
     
     func onSent(watch: PBWatch!, dictionary: [NSObject : AnyObject]!, error: NSError!) {
         if error == nil {
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
         }
     }
     
-    func sendDataToWatch(accountID: String, accountName: String, accountKey: String, shouldDelete: Bool, lastDelegate: WatchSenderDelegate) {
+    func sendDataToWatch(accountName: String, accountKey: String, lastDelegate: WatchSenderDelegate) {
         lastWatchSenderDelegate = lastDelegate
         if let watch = targetWatch {
             if watch.connected == false {
@@ -56,11 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
                 let unixTimeStamp = NSDate().timeIntervalSince1970
 
                 let update = [
-                    accountUniqueIDIndex : accountID,
                     accountNameIndex: accountName,
-                    accountKeyIndex: accountKey,
-                    accountDeleteIndex: shouldDelete.description,
-                    unixTimeStampIndex: unixTimeStamp.description
+                    accountKeyIndex: accountKey
                 ]
                 
                 let updateDict = update as NSDictionary
