@@ -140,12 +140,12 @@ static void init(void) {
     .load = window_load,
     .unload = window_unload,
   });
-
+    printf("here");
   // Required to recieve stuff
   const int inbound_size = app_message_inbox_size_maximum();
   const int outbound_size = app_message_outbox_size_maximum();
   app_message_open(inbound_size, outbound_size);
-
+    printf("here2");
   const bool animated = true;
   window_stack_push(window, animated);
 }
