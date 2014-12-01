@@ -59,11 +59,8 @@ class AddAccountTableViewController: UITableViewController, WatchSenderDelegate 
             let accountURL = newAccount.objectID.URIRepresentation()
             let accountID = accountURL.lastPathComponent
             
-            appDelegate.sendDataToWatch(
-                accountID,
-                accountName: name,
+            appDelegate.sendDataToWatch(name,
                 accountKey: key,
-                shouldDelete: false,
                 lastDelegate: self
             )
         }

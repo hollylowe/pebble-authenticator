@@ -89,7 +89,7 @@ class MainTableViewController: UITableViewController, WatchSenderDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let accountURL = account.objectID.URIRepresentation()
         let accountID = accountURL.lastPathComponent
-        appDelegate.sendDataToWatch(accountID, accountName: account.name, accountKey: account.timeBasedKey, shouldDelete: true, lastDelegate: self)
+        appDelegate.sendDataToWatch(account.name, accountKey: account.timeBasedKey, lastDelegate: self)
         
     }
     

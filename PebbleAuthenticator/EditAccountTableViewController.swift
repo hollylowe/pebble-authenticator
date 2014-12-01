@@ -53,7 +53,7 @@ class EditAccountTableViewController: UITableViewController, WatchSenderDelegate
         let accountURL = accountToEdit.objectID.URIRepresentation()
         let accountID = accountURL.lastPathComponent
         
-        appDelegate.sendDataToWatch(accountID, accountName: name, accountKey: key, shouldDelete: false, lastDelegate: self)
+        appDelegate.sendDataToWatch(name, accountKey: key, lastDelegate: self)
     }
     
     override func viewDidLoad() {
