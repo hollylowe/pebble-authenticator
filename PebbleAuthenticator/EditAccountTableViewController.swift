@@ -19,16 +19,22 @@ class EditAccountTableViewController: UITableViewController, WatchSenderDelegate
     var delegate: AccountDetailViewController!
     
     func watchSendSuccessful() {
+        /*
         let name = nameTextField.text
         let key = keyTextField.text
         // Save to core data
         accountToEdit.setAndSaveName(name)
         accountToEdit.setAndSaveTimeBasedKey(key)
+        
         self.delegate.updateAccountTextFieldsWithName(name, andKey: key)
+        
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+        */
     }
     
     func watchSendFailure() {
+        /*
         // Dont save to core data
         // Show a status alert
         var alert = UIAlertController(
@@ -37,10 +43,12 @@ class EditAccountTableViewController: UITableViewController, WatchSenderDelegate
             preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+        */
     }
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var keyTextField: UITextField!
+    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -48,12 +56,20 @@ class EditAccountTableViewController: UITableViewController, WatchSenderDelegate
     @IBAction func doneButtonTapped(sender: AnyObject) {
         let name = nameTextField.text
         let key = keyTextField.text
+
+        // Save to core data
+        accountToEdit.setAndSaveName(name)
+        accountToEdit.setAndSaveTimeBasedKey(key)
+        
+        // Update previous view
+        delegate.updateAccountTextFieldsWithName(name, andKey: key)
+        
         // Send to pebble
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let accountURL = accountToEdit.objectID.URIRepresentation()
-        let accountID = accountURL.lastPathComponent
+        appDelegate.updateWatchData()
         
-        appDelegate.sendDataToWatch(name, accountKey: key, lastDelegate: self)
+        // Dismiss
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {

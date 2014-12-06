@@ -14,7 +14,19 @@ class MainTableViewController: UITableViewController, WatchSenderDelegate {
     let mainToAccountDetailSegueIdentifier = "MainToAccountDetailSegue"
     var lastDeleteIndexPath: NSIndexPath?
     
+    var updatesToSend = Array<NSDictionary>()
+    
+    let accountNameIndex = 0
+    let accountKeyIndex = 1
+    
+    @IBAction func refreshButtonTapped(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.updateWatchData()
+    }
+    
+    
     func watchSendFailure() {
+        
         var alert = UIAlertController(
             title: "Error",
             message: "Unable to delete account from watch.",
@@ -22,15 +34,28 @@ class MainTableViewController: UITableViewController, WatchSenderDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
 
         self.presentViewController(alert, animated: true, completion: nil)
+
     }
     
     func watchSendSuccessful() {
+        /*
+        if updatesToSend.count > 0 {
+            updatesToSend.removeAtIndex(0)
+            if updatesToSend.count > 0 {
+                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                appDelegate.sendDictionaryToWatch(updatesToSend[0], lastWatchDelegate: self)
+            }
+        }
+        */
+        
+        
         if let indexPath = lastDeleteIndexPath {
             deleteAccount(indexPath)
             lastDeleteIndexPath = nil
         }
+        
     }
-    
+
     override func viewDidLoad() {
         accounts = Account.fetchAllAccounts()
         self.tableView.tableFooterView = UIView()
@@ -74,6 +99,7 @@ class MainTableViewController: UITableViewController, WatchSenderDelegate {
         if let context = appDelegate.managedObjectContext {
             context.deleteObject(account)
         }
+        
         appDelegate.saveContext()
         accounts = Account.fetchAllAccounts()
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -83,16 +109,23 @@ class MainTableViewController: UITableViewController, WatchSenderDelegate {
     }
     
     func deleteAccountRowAction(rowAction: UITableViewRowAction!, indexPath: NSIndexPath!) {
+        deleteAccount(indexPath)
         
+        /*
         lastDeleteIndexPath = indexPath
         let account = accounts[indexPath.row]
+        */
+        /*
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let accountURL = account.objectID.URIRepresentation()
         let accountID = accountURL.lastPathComponent
         appDelegate.sendDataToWatch(account.name, accountKey: account.timeBasedKey, lastDelegate: self)
+        */
         
+        // Send to watch
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.updateWatchData()
     }
-    
     
 }
 

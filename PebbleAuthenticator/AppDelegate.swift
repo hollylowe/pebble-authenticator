@@ -16,13 +16,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     var targetWatch: PBWatch?
     var lastWatchSenderDelegate: WatchSenderDelegate?
     
-    // let accountUniqueIDIndex = 0
+    // Dictionarys sent to watch
     let accountNameIndex = 0
     let accountKeyIndex = 1
-    //let accountDeleteIndex = 4
-    //let unixTimeStampIndex = 9
+    
+    var accounts = Array<Account>()
+    var updateQueue = Array<NSDictionary>()
     
     func onSent(watch: PBWatch!, dictionary: [NSObject : AnyObject]!, error: NSError!) {
+        if error == nil {
+            if updateQueue.count == 1 {
+                // the one at 0 was just sent and is the last one, so remove it
+                updateQueue.removeAtIndex(0)
+            } else if updateQueue.count > 1 {
+                // the one at 0 was just sent, so remove it
+                updateQueue.removeAtIndex(0)
+                
+                // but there are additional updates, so send them off
+                let nextUpdateDictionary = updateQueue[0]
+                watch.appMessagesPushUpdate(nextUpdateDictionary, onSent: onSent)
+            }
+        } else {
+            updateQueue.removeAll(keepCapacity: false)
+            
+            println("Error: \(error)")
+        }
+        /*
         if error == nil {
             println("Update sent!")
             if let delegate = lastWatchSenderDelegate {
@@ -36,6 +55,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
             }
             println("Error: \(error)")
         }
+        */
+    }
+    
+    func updateWatchData() {
+        if let watch = targetWatch {
+            accounts = Account.fetchAllAccounts()
+            
+            let clearDictionary = [
+                accountNameIndex: "",
+                accountKeyIndex: ""
+            ]
+            
+            updateQueue.append(clearDictionary)
+            
+            for account in accounts {
+                let accountDictionary = [
+                    accountNameIndex: account.name,
+                    accountKeyIndex: account.timeBasedKey.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    ] as NSDictionary
+                
+                updateQueue.append(accountDictionary)
+            }
+            
+            let firstUpdate = updateQueue[0]
+            watch.appMessagesPushUpdate(firstUpdate, onSent: onSent)
+        }
+    }
+    
+    func sendDictionaryToWatch(dictionary: NSDictionary, lastWatchDelegate: WatchSenderDelegate) {
+        lastWatchSenderDelegate = lastWatchDelegate
+        if let watch = targetWatch {
+            if watch.connected == false {
+                var alert = UIAlertController(
+                    title: "Error",
+                    message: "Watch is not connected",
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                if let window = self.window {
+                    if let root = window.rootViewController as? UINavigationController {
+                        root.visibleViewController.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                watch.appMessagesPushUpdate(dictionary, onSent: onSent)
+            }
+            
+        }
+    }
+    
+    func clearWatchData() {
+        if let watch = targetWatch {
+            if watch.connected == false {
+                var alert = UIAlertController(
+                    title: "Error",
+                    message: "Watch is not connected",
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                if let window = self.window {
+                    if let root = window.rootViewController as? UINavigationController {
+                        root.visibleViewController.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                let update = [
+                    accountNameIndex: "",
+                    accountKeyIndex: ""
+                ]
+                
+                let updateDict = update as NSDictionary
+                println("Clearing watch data...")
+                watch.appMessagesPushUpdate(updateDict, onSent: onSent)
+            }
+            
+        }
+
     }
     
     func sendDataToWatch(accountName: String, accountKey: String, lastDelegate: WatchSenderDelegate) {
@@ -75,9 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     func setTargetWatch(watch: PBWatch) {
         self.targetWatch = watch
         
-        // Configure our communications channel to target the weather app:
-        // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definition on the watch's end:
-        // For Pebras (testing stuff out): 
+        // For Pebras (testing stuff out):
         var bytes: [UInt8] = [0x79, 0x68, 0xb8, 0x07, 0x8d, 0x6d, 0x4a, 0xb9, 0xa8, 0x79, 0xc5, 0xa8, 0x21, 0x6e, 0x8a, 0x64]
         // For Authenticator:
         // var bytes: [UInt8] = [0x94, 0x8c, 0x07, 0x11, 0x3c, 0xe6, 0x4d, 0x6b, 0xb1, 0xc9, 0x60, 0xc1, 0xea, 0xf7, 0x81, 0xb3]

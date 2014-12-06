@@ -44,7 +44,7 @@
 
 /* Begin PBXFileReference section */
 		A012537F1A181511006F0E83 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PebbleAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01EDACE1A1808F500F152CE /* PebbleAuthenticatorenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PebbleAuthenticatorenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01EDAD21A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01EDAD31A1808F500F152CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01EDAD61A1808F500F152CE /* PebbleAuthenticator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PebbleAuthenticator.xcdatamodel; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		A01EDADB1A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A01EDADD1A1808F500F152CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A01EDAE01A1808F500F152CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01EDAE61A1808F500F152CE /* PebbleAuthenticatorenticatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PebbleAuthenticatorenticatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01EDAEB1A1808F500F152CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01EDAEC1A1808F500F152CE /* PebbleAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PebbleAuthenticatorTests.swift; sourceTree = "<group>"; };
 		A01EDAF61A1809F700F152CE /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleKit.framework; path = PebbleAuthenticator/PebbleKit.framework; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 		A01EDACF1A1808F500F152CE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */,
-				A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */,
+				A01EDACE1A1808F500F152CE /* PebbleAuthenticatorenticator.app */,
+				A01EDAE61A1808F500F152CE /* PebbleAuthenticatorenticatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,9 +207,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A01EDACD1A1808F500F152CE /* PebbleAuthenticator */ = {
+		A01EDACD1A1808F500F152CE /* PebbleAuthenticatorenticator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */;
+			buildConfigurationList = A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorenticator" */;
 			buildPhases = (
 				A01EDACA1A1808F500F152CE /* Sources */,
 				A01EDACB1A1808F500F152CE /* Frameworks */,
@@ -219,14 +219,14 @@
 			);
 			dependencies = (
 			);
-			name = PebbleAuthenticator;
+			name = PebbleAuthenticatorenticator;
 			productName = PebbleAuthenticator;
-			productReference = A01EDACE1A1808F500F152CE /* PebbleAuthenticator.app */;
+			productReference = A01EDACE1A1808F500F152CE /* PebbleAuthenticatorenticator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A01EDAE51A1808F500F152CE /* PebbleAuthenticatorTests */ = {
+		A01EDAE51A1808F500F152CE /* PebbleAuthenticatorenticatorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */;
+			buildConfigurationList = A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorenticatorTests" */;
 			buildPhases = (
 				A01EDAE21A1808F500F152CE /* Sources */,
 				A01EDAE31A1808F500F152CE /* Frameworks */,
@@ -237,9 +237,9 @@
 			dependencies = (
 				A01EDAE81A1808F500F152CE /* PBXTargetDependency */,
 			);
-			name = PebbleAuthenticatorTests;
+			name = PebbleAuthenticatorenticatorTests;
 			productName = PebbleAuthenticatorTests;
-			productReference = A01EDAE61A1808F500F152CE /* PebbleAuthenticatorTests.xctest */;
+			productReference = A01EDAE61A1808F500F152CE /* PebbleAuthenticatorenticatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -273,8 +273,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A01EDACD1A1808F500F152CE /* PebbleAuthenticator */,
-				A01EDAE51A1808F500F152CE /* PebbleAuthenticatorTests */,
+				A01EDACD1A1808F500F152CE /* PebbleAuthenticatorenticator */,
+				A01EDAE51A1808F500F152CE /* PebbleAuthenticatorenticatorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -332,7 +332,7 @@
 /* Begin PBXTargetDependency section */
 		A01EDAE81A1808F500F152CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A01EDACD1A1808F500F152CE /* PebbleAuthenticator */;
+			target = A01EDACD1A1808F500F152CE /* PebbleAuthenticatorenticator */;
 			targetProxy = A01EDAE71A1808F500F152CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -449,7 +449,7 @@
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PebbleAuthenticatorenticator;
 				SWIFT_OBJC_BRIDGING_HEADER = "PebbleAuthenticator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -469,7 +469,7 @@
 				INFOPLIST_FILE = PebbleAuthenticator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PebbleAuthenticatorenticator;
 				SWIFT_OBJC_BRIDGING_HEADER = "PebbleAuthenticator-Bridging-Header.h";
 			};
 			name = Release;
@@ -489,7 +489,7 @@
 				);
 				INFOPLIST_FILE = PebbleAuthenticatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PebbleAuthenticatorenticatorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PebbleAuthenticator.app/PebbleAuthenticator";
 			};
 			name = Debug;
@@ -505,7 +505,7 @@
 				);
 				INFOPLIST_FILE = PebbleAuthenticatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PebbleAuthenticatorenticatorTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PebbleAuthenticator.app/PebbleAuthenticator";
 			};
 			name = Release;
@@ -522,7 +522,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticator" */ = {
+		A01EDAF01A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorenticator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A01EDAF11A1808F500F152CE /* Debug */,
@@ -531,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorTests" */ = {
+		A01EDAF31A1808F500F152CE /* Build configuration list for PBXNativeTarget "PebbleAuthenticatorenticatorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A01EDAF41A1808F500F152CE /* Debug */,

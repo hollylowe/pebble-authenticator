@@ -105,7 +105,7 @@ int main(void) {
 
     ofs = s.state.b[19] & 0xf;
     otp = 0;
-otp = ((s.state.b[ofs] & 0x7f) << 24) |
+    otp = ((s.state.b[ofs] & 0x7f) << 24) |
 		((s.state.b[ofs + 1] & 0xff) << 16) |
 		((s.state.b[ofs + 2] & 0xff) << 8) |
 		(s.state.b[ofs + 3] & 0xff);

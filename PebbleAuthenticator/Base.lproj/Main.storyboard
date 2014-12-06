@@ -8,51 +8,46 @@
         <!--Accounts-->
         <scene sceneID="rw1-A0-v5g">
             <objects>
-                <tableViewController id="rdg-YQ-Rm4" customClass="MainTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="rdg-YQ-Rm4" customClass="MainTableViewController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" id="XGd-GK-7H5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountCellIdentifier" rowHeight="82" id="Wh4-2s-DyC" customClass="AccountCell" customModule="PebbleAuthenticator" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AccountCellIdentifier" rowHeight="82" id="Wh4-2s-DyC" customClass="AccountCell" customModule="PebbleAuthenticatorenticator" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wh4-2s-DyC" id="77N-GH-UL5">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shj-p2-kGy">
-                                            <rect key="frame" x="23" y="15" width="569" height="31.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shj-p2-kGy">
+                                            <rect key="frame" x="31" y="24" width="528" height="31.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="31.5" id="H1I-NG-9m9"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="23"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Key" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qb-1T-ces">
-                                            <rect key="frame" x="23" y="45" width="569" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="top" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="1.5" id="5q3-1V-TDa"/>
                                         <constraint firstItem="shj-p2-kGy" firstAttribute="top" secondItem="77N-GH-UL5" secondAttribute="topMargin" id="8Yn-at-tsv"/>
-                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="top" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="1.5" id="AqT-wx-eOW"/>
+                                        <constraint firstAttribute="centerY" secondItem="shj-p2-kGy" secondAttribute="centerY" constant="1" id="9rU-Xz-H9f"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="trailing" secondItem="77N-GH-UL5" secondAttribute="trailingMargin" id="MlS-Xz-6uO"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="shj-p2-kGy" secondAttribute="bottom" constant="55" id="Omf-gQ-F7n"/>
-                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="trailing" secondItem="77N-GH-UL5" secondAttribute="trailingMargin" id="RdY-he-FLX"/>
-                                        <constraint firstItem="3Qb-1T-ces" firstAttribute="leading" secondItem="77N-GH-UL5" secondAttribute="leadingMargin" constant="15" id="YZ0-jc-kXo"/>
                                         <constraint firstItem="shj-p2-kGy" firstAttribute="trailing" secondItem="77N-GH-UL5" secondAttribute="trailingMargin" id="ZP2-sq-LrA"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="3Qb-1T-ces" secondAttribute="bottom" constant="11.5" id="i7K-ZD-Ak6"/>
                                         <constraint firstItem="shj-p2-kGy" firstAttribute="top" secondItem="77N-GH-UL5" secondAttribute="topMargin" id="mFb-V7-M88"/>
-                                        <constraint firstItem="shj-p2-kGy" firstAttribute="leading" secondItem="77N-GH-UL5" secondAttribute="leadingMargin" constant="15" id="uyT-jO-gGf"/>
+                                        <constraint firstItem="shj-p2-kGy" firstAttribute="leading" secondItem="77N-GH-UL5" secondAttribute="leadingMargin" constant="23" id="uyT-jO-gGf"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="8Yn-at-tsv"/>
                                             <exclude reference="Omf-gQ-F7n"/>
+                                            <exclude reference="ZP2-sq-LrA"/>
+                                            <exclude reference="mFb-V7-M88"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="accountKeyLabel" destination="3Qb-1T-ces" id="yEl-AJ-Emy"/>
                                     <outlet property="accountNameLabel" destination="shj-p2-kGy" id="4NY-Cf-3aD"/>
                                 </connections>
                             </tableViewCell>
@@ -63,6 +58,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Accounts" id="RcT-SJ-Z03">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="48y-5A-znx">
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="rdg-YQ-Rm4" id="rwI-Gt-BPp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="Xco-6L-WMP">
                             <connections>
                                 <segue destination="4uj-R3-EfR" kind="presentation" identifier="MainToAddAccountSegue" id="6e5-nD-k1j"/>
@@ -80,7 +80,7 @@
         <!--Add Account-->
         <scene sceneID="s6P-jl-leQ">
             <objects>
-                <tableViewController id="ZOT-4o-tcg" customClass="AddAccountTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ZOT-4o-tcg" customClass="AddAccountTableViewController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GgA-pd-ugQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,7 +205,7 @@
         <!--Account Detail View Controller-->
         <scene sceneID="Q3z-EH-5VQ">
             <objects>
-                <tableViewController storyboardIdentifier="AccountDetailViewController" id="AwJ-wf-ODB" customClass="AccountDetailViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AccountDetailViewController" id="AwJ-wf-ODB" customClass="AccountDetailViewController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="plJ-Wy-sTA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,7 +257,7 @@
         <!--Edit Account-->
         <scene sceneID="wjX-zD-XuQ">
             <objects>
-                <tableViewController storyboardIdentifier="EditAccountTableViewController" id="c6s-os-966" customClass="EditAccountTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditAccountTableViewController" id="c6s-os-966" customClass="EditAccountTableViewController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iQO-hN-18N">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -363,7 +363,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="Pzx-cG-krX">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="gT7-59-Ba6" customClass="MainTabBarController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="gT7-59-Ba6" customClass="MainTabBarController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="RHJ-YU-BIi">
@@ -401,7 +401,7 @@
         <!--Settings-->
         <scene sceneID="joe-iI-sbu">
             <objects>
-                <tableViewController id="kvw-go-akc" customClass="SettingsTableViewController" customModule="PebbleAuthenticator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="kvw-go-akc" customClass="SettingsTableViewController" customModule="PebbleAuthenticatorenticator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="5yS-FS-bpW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

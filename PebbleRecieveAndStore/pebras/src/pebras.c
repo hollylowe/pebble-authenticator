@@ -1,6 +1,8 @@
 #include <pebble.h>
+#include "base32.h" 
 #include "SHA1.h"
 static Window *window;
+static TextLayer *timer_layer;
 static TextLayer *account_one_name_layer;
 static TextLayer *account_one_code_layer;
 static TextLayer *account_two_name_layer;
@@ -21,6 +23,17 @@ static uint8_t sync_buffer[256];
 #define ACCOUNT_THREE 3
 #define NO_ACCOUNT 4
 
+#define TIMER_LAYER_WIDTH 30
+#define TIMER_LAYER_HEIGHT 30
+#define TIMER_LAYER_X_COORD 114
+#define TIMER_LAYER_Y_COORD 121
+#define TEXT_LAYER_WIDTH 110
+
+int prev_epoch = 0;
+int current_epoch = 0;
+int timer_count = 30;
+char* timer_text = "..";
+
 char account_one_key[ACCOUNT_KEY_LENGTH];
 char account_one_name[MAX_ACCOUNT_NAME_LENGTH];
 char account_one_code[MAX_ACCOUNT_CODE_LENGTH];
@@ -37,6 +50,35 @@ enum DictionaryIndices {
   ACCOUNT_NAME_INDEX = 0, // TUPLE_CSTRING
   ACCOUNT_TIME_BASED_KEY_INDEX = 1  // TUPLE_CSTRING
 };
+
+char *itoa(int num)
+{
+  static char buff[20] = {};
+  int i = 0, temp_num = num, length = 0;
+  char *string = buff;
+  
+  if(num >= 0) {
+    // count how many characters in the number
+    while(temp_num) {
+      temp_num /= 10;
+      length++;
+    }
+    
+    // assign the number to the buffer starting at the end of the 
+    // number and going to the begining since we are doing the
+    // integer to character conversion on the last number in the
+    // sequence
+    for(i = 0; i < length; i++) {
+      buff[(length-1)-i] = '0' + (num % 10);
+      num /= 10;
+    }
+    buff[i] = '\0'; // can't forget the null byte to properly end our string
+  }
+  else
+    return "Unsupported Number";
+  
+  return string;
+}
 
 void printHash(uint8_t* hash, char *str) {
     int i;
@@ -72,7 +114,6 @@ void decToHex(uint8_t *hash, char *str) {
 
 
 int intervals(void) {
-    //printf("%d\n", (int)time(NULL));
     return (int)time(NULL) / 30;
 }
 
@@ -115,71 +156,85 @@ void set_next_account_name(const char* name) {
   }
 }
 
-void updateCodeWithKey(char* code, char* key) {
+void updateCodeWithKey(char* code, char* key) {    
+  unsigned char unsignedKey[] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+  unsigned char test[40];
+  int length; 
+
+  memcpy(unsignedKey, key, 40);
+  length = base32_decode(unsignedKey, test, 40);
+  static char tokenText[] = "TESTIN";
+
+  char *str = (char *)malloc(42);
+  sha1nfo s;
+  uint8_t *hash;
+  int cur_time;
+  char sha1_time[8] = {0,0,0,0,0,0,0,0};
+  uint8_t ofs;
+  uint32_t otp;
 
 
-  const unsigned char sha1_key[] = {
-  'H', 'e', 'l', 'l', 'o', '!', 0xDE, 0xAD, 0xBE, 0xEF
-  };
+  cur_time = intervals();
+  cur_time = cur_time + 960;
 
-    static char tokenText[] = "TESTIN";
+  // Updating timer 
+  prev_epoch = current_epoch;
+  current_epoch = cur_time;
+  if (current_epoch - prev_epoch == 1) {
+    timer_count = 30;
+  }
 
-    char *str = (char *)malloc(42);
-    sha1nfo s;
-    uint8_t *hash;
-    int time;
-    char sha1_time[8] = {0,0,0,0,0,0,0,0};
-    uint8_t ofs;
-    uint32_t otp;
+  sha1_time[4] = (cur_time >> 24) & 0xFF;
+  sha1_time[5] = (cur_time >> 16) & 0xFF;
+  sha1_time[6] = (cur_time >> 8) & 0XFF;
+  sha1_time[7] = cur_time & 0xFF;
 
+  sha1_initHmac(&s, test, length);
+  sha1_write(&s, sha1_time, 8);
+  hash = sha1_resultHmac(&s);
+  printHash(hash, str);
 
-    time = intervals();
-    printf("Time: %d\n", time);
-    sha1_time[4] = (time >> 24) & 0xFF;
-    sha1_time[5] = (time >> 16) & 0xFF;
-    sha1_time[6] = (time >> 8) & 0XFF;
-    sha1_time[7] = time & 0xFF;
-    printf("sha1_time: %s\n", sha1_time);
-    int i;
-    for (i = 0; i < 8; i++) {
-        printf("%d ", sha1_time[i]);
-    }    
-
-
-    sha1_initHmac(&s, sha1_key, 10);
-    sha1_write(&s, sha1_time, 8);
-    hash = sha1_resultHmac(&s);
-    printHash(hash, str);
-
-    ofs = s.state.b[19] & 0xf;
-    otp = 0;
-    otp = ((s.state.b[ofs] & 0x7f) << 24) |
-    ((s.state.b[ofs + 1] & 0xff) << 16) |
-    ((s.state.b[ofs + 2] & 0xff) << 8) |
-    (s.state.b[ofs + 3] & 0xff);
+  ofs = s.state.b[19] & 0xf;
+  otp = 0;
+  otp = ((s.state.b[ofs] & 0x7f) << 24) |
+  ((s.state.b[ofs + 1] & 0xff) << 16) |
+  ((s.state.b[ofs + 2] & 0xff) << 8) |
+  (s.state.b[ofs + 3] & 0xff);
   otp %= DIGITS_TRUNCATE;
   
-  // Convert result into a string.  Sure wish we had working snprintf...
-  for(i = 0; i < 6; i++) {
+  int i;  
+  for (i = 0; i < 6; i++) {
     tokenText[5-i] = 0x30 + (otp % 10);
     otp /= 10;
   }
   tokenText[6]=0;
 
-    printf("Result: %c%c%c%c%c%c\n", 
-        tokenText[0],
-        tokenText[1],
-        tokenText[2],
-        tokenText[3],
-        tokenText[4],
-        tokenText[5]);
   strcpy(code, tokenText);
+}
+
+void clearAllData() {
+  account_one_key[0] = (char) 0;
+  account_one_name[0] = (char) 0;
+  account_one_code[0] = (char) 0;
+
+  account_two_key[0] = (char) 0;
+  account_two_name[0] = (char) 0;
+  account_two_code[0] = (char) 0;
+
+  account_three_key[0] = (char) 0;
+  account_three_name[0] = (char) 0;
+  account_three_code[0] = (char) 0;
+
+  layer_mark_dirty(text_layer_get_layer(account_one_name_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_one_code_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_two_name_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_two_code_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_three_name_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_three_code_layer)); 
 
 }
 
 void updateCodes() {
-  // char new_code[MAX_ACCOUNT_CODE_LENGTH];
-
   // Check every account for a key
   if (account_one_key[0] != 0) {
     updateCodeWithKey(account_one_code, account_one_key);
@@ -192,6 +247,24 @@ void updateCodes() {
   if (account_three_key[0] != 0) {
     updateCodeWithKey(account_three_code, account_three_key);
   } 
+  
+}
+
+static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
+  updateCodes();
+
+  // Timer  
+  if (current_epoch != 0 && prev_epoch != 0) {
+    strcpy(timer_text, itoa(timer_count));
+    timer_count = timer_count - 1;
+    layer_mark_dirty(text_layer_get_layer(timer_layer));
+  }
+  
+
+  // Codes
+  layer_mark_dirty(text_layer_get_layer(account_one_code_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_two_code_layer)); 
+  layer_mark_dirty(text_layer_get_layer(account_three_code_layer)); 
 }
 
 void set_next_account_key(const char* key) {
@@ -226,18 +299,27 @@ static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tup
   APP_LOG(APP_LOG_LEVEL_DEBUG, "value: %s", new_tuple->value->cstring);
   APP_LOG(APP_LOG_LEVEL_DEBUG, "key: %d", (uint8_t) key);
 
+  
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Time: %d", (int) intervals());
+
+
   switch (key) {
     case ACCOUNT_NAME_INDEX:
         // Data for Edit and Create command
         if (strlen(new_tuple->value->cstring) > 0) {
           set_next_account_name(new_tuple->value->cstring);
+        } else {
+          clearAllData();
         }
+
         break;
     case ACCOUNT_TIME_BASED_KEY_INDEX:
         // Data for Edit and Create command
         // text_layer_set_text(third_text_layer, new_tuple->value->cstring);
         if (strlen(new_tuple->value->cstring) > 0) {
           set_next_account_key(new_tuple->value->cstring);
+        } else {
+          clearAllData();
         }
 
         break;
@@ -249,40 +331,46 @@ static void window_load(Window *window) {
   GRect bounds = layer_get_bounds(window_layer);
 
   // Setting up the text layer
-  account_one_name_layer = text_layer_create(GRect(0, 0, 144, 168));
+  timer_layer = text_layer_create(GRect(TIMER_LAYER_X_COORD, TIMER_LAYER_Y_COORD, TIMER_LAYER_WIDTH, TIMER_LAYER_HEIGHT));
+  text_layer_set_text(timer_layer, timer_text);
+  text_layer_set_font(timer_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  text_layer_set_text_alignment(timer_layer, GTextAlignmentCenter);
+  text_layer_set_overflow_mode(timer_layer, GTextOverflowModeWordWrap);
+
+  account_one_name_layer = text_layer_create(GRect(5, 0, TEXT_LAYER_WIDTH, 25));
   text_layer_set_text(account_one_name_layer, "");
   text_layer_set_font(account_one_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text_alignment(account_one_name_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(account_one_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_one_name_layer, GTextOverflowModeWordWrap);
 
-  account_one_code_layer = text_layer_create(GRect(0, 25, 144, 168));
+  account_one_code_layer = text_layer_create(GRect(10, 25, TEXT_LAYER_WIDTH, 25));
   text_layer_set_text(account_one_code_layer, "");
-  text_layer_set_font(account_one_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text_alignment(account_one_code_layer, GTextAlignmentCenter);
+  text_layer_set_font(account_one_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text_alignment(account_one_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_one_code_layer, GTextOverflowModeWordWrap);
 
-  account_two_name_layer = text_layer_create(GRect(0, 50, 144, 168));
+  account_two_name_layer = text_layer_create(GRect(5, 50, TEXT_LAYER_WIDTH, 25));
   text_layer_set_font(account_two_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text(account_two_name_layer, "");
-  text_layer_set_text_alignment(account_two_name_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(account_two_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_two_name_layer, GTextOverflowModeWordWrap);
 
-  account_two_code_layer = text_layer_create(GRect(0, 75, 144, 168));
+  account_two_code_layer = text_layer_create(GRect(10, 75, TEXT_LAYER_WIDTH, 25));
   text_layer_set_text(account_two_code_layer, "");
-  text_layer_set_font(account_two_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text_alignment(account_two_code_layer, GTextAlignmentCenter);
+  text_layer_set_font(account_two_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text_alignment(account_two_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_two_code_layer, GTextOverflowModeWordWrap);
 
-  account_three_name_layer = text_layer_create(GRect(0, 100, 144, 168));
+  account_three_name_layer = text_layer_create(GRect(5, 100, TEXT_LAYER_WIDTH, 25));
   text_layer_set_font(account_three_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text(account_three_name_layer, "");
-  text_layer_set_text_alignment(account_three_name_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(account_three_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_three_name_layer, GTextOverflowModeWordWrap);
 
-  account_three_code_layer = text_layer_create(GRect(0, 125, 144, 168));
-  text_layer_set_font(account_three_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  account_three_code_layer = text_layer_create(GRect(10, 125, TEXT_LAYER_WIDTH, 25));
+  text_layer_set_font(account_three_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text(account_three_code_layer, "");
-  text_layer_set_text_alignment(account_three_code_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(account_three_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_three_code_layer, GTextOverflowModeWordWrap);
 
   // This is required to recieve stuff 
@@ -293,6 +381,7 @@ static void window_load(Window *window) {
   app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
         sync_tuple_changed_callback, sync_error_callback, NULL);
 
+  layer_add_child(window_layer, text_layer_get_layer(timer_layer));
   layer_add_child(window_layer, text_layer_get_layer(account_one_name_layer));
   layer_add_child(window_layer, text_layer_get_layer(account_one_code_layer));
   layer_add_child(window_layer, text_layer_get_layer(account_two_name_layer));
@@ -345,11 +434,13 @@ static void init(void) {
   const int outbound_size = app_message_outbox_size_maximum();
   app_message_open(inbound_size, outbound_size);
 
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
   const bool animated = true;
   window_stack_push(window, animated);
 }
 
 static void deinit(void) {
+  tick_timer_service_unsubscribe();
   window_destroy(window);
 }
 

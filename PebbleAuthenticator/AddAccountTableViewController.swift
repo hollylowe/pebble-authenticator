@@ -22,12 +22,15 @@ class AddAccountTableViewController: UITableViewController, WatchSenderDelegate 
     }
     
     func watchSendSuccessful() {
+        /*
         lastCreatedAccount = nil
         self.delegate.reloadTableView()
         self.dismissViewControllerAnimated(true, completion: nil)
+        */
     }
     
     func watchSendFailure() {
+        /*
         if let account = lastCreatedAccount {
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             // Delete from core data
@@ -44,14 +47,30 @@ class AddAccountTableViewController: UITableViewController, WatchSenderDelegate 
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
-        
+        */
     }
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
-        // Save the account
         let name = nameTextfield.text
         let key = keyTextfield.text
         
+        // Create an account
+        Account.createNewAccount(name, newTimeBasedKey: key)
+        
+        // Update watch
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.updateWatchData()
+        self.delegate.reloadTableView()
+        self.dismissViewControllerAnimated(true, completion: nil)
+        /*
+        Account.createNewAccount(name, newTimeBasedKey: key)
+
+        self.delegate.reloadTableView()
+        self.delegate.updateWatchData()
+        self.dismissViewControllerAnimated(true, completion: nil)
+        */
+        
+        /*
         if let newAccount = Account.createNewAccount(name, newTimeBasedKey: key) {
             // Send to Pebble
             lastCreatedAccount = newAccount
@@ -64,6 +83,9 @@ class AddAccountTableViewController: UITableViewController, WatchSenderDelegate 
                 lastDelegate: self
             )
         }
+        */
+        
+        
     }
     
     override func viewDidLoad() {
