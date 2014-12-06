@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SHA1.h"
-  
+#include "base32.h" 
+
 #define TIME_ZONE_OFFSET -8
-#define TEST_KEY "ylxxyp6aho7w7txfa662xcjdahvmctli"
 
 Window *window;
 TextLayer *text_layer;
@@ -70,10 +70,10 @@ int intervals(void) {
 
 /*************************************/
 int main(void) {
-	const unsigned char sha1_key[] = {
-	'H', 'e', 'l', 'l', 'o', '!', 0xDE, 0xAD, 0xBE, 0xEF
-	};
 
+    unsigned char key2[] = "k7obbi5twpbxwhva2fl2f5be7ubmk2se";    
+    unsigned char test[40];
+    printf("Len: %d\n", base32_decode(key2, test, 40));
     static char tokenText[] = "TESTIN";
 
     char *str = (char *)malloc(42);
@@ -91,14 +91,8 @@ int main(void) {
     sha1_time[5] = (time >> 16) & 0xFF;
     sha1_time[6] = (time >> 8) & 0XFF;
     sha1_time[7] = time & 0xFF;
-    printf("sha1_time: %s\n", sha1_time);
-    int i;
-    for (i = 0; i < 8; i++) {
-        printf("%d ", sha1_time[i]);
-    }    
 
-
-    sha1_initHmac(&s, sha1_key, 10);
+    sha1_initHmac(&s, test, 20);
     sha1_write(&s, sha1_time, 8);
     hash = sha1_resultHmac(&s);
     printHash(hash, str);
@@ -112,7 +106,8 @@ int main(void) {
 	otp %= DIGITS_TRUNCATE;
 	
 	// Convert result into a string.  Sure wish we had working snprintf...
-	for(i = 0; i < 6; i++) {
+    int i;	
+    for(i = 0; i < 6; i++) {
 		tokenText[5-i] = 0x30 + (otp % 10);
 		otp /= 10;
 	}
@@ -126,8 +121,13 @@ int main(void) {
         tokenText[4],
         tokenText[5]);
 
-     
- 
+    bluetooth_connection_service_subscribe(NULL); 
+    if (bluetooth_connection_service_peek()) {
+        printf("%s\n", "Bluetooth Connected!");
+    }
+    else {
+        printf("%s\n", "Bluetooth Not Connected!");
+    }
     handle_init(tokenText);
     app_event_loop();
     handle_deinit();
