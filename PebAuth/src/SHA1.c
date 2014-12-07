@@ -1,9 +1,13 @@
 /*************************************/
 
-/* This code is public-domain - it is based on libcrypt
+
+
+/* Sourced from the liboath project, modified for our purposes.
+ * https://oauth.googlecode.com/svn/code/c/liboauth/src/sha1.c
+ * https://code.google.com/p/oauth/
+ * This code is public-domain - it is based on libcrypt
  * placed in the public domain by Wei Dai and other contributors.
  */
-// gcc -Wall -DSHA1TEST -o sha1test sha1.c && ./sha1test
 
 #include <stdint.h>
 #include <string.h>

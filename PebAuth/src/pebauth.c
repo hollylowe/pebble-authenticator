@@ -175,6 +175,7 @@ void updateCodeWithKey(char* code, char* key) {
 
 
   cur_time = intervals();
+  // Hardcoded timezone offset - works for GMT -8 (Pacific Time)  
   cur_time = cur_time + 960;
 
   // Updating timer 
