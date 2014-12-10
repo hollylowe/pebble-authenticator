@@ -13,6 +13,8 @@ static TextLayer *account_three_code_layer;
 static AppSync sync;
 static uint8_t sync_buffer[256];
 
+#define MyTupletCString(_key, _cstring) \
+((const Tuplet) { .type = TUPLE_CSTRING, .key = _key, .cstring = { .data = _cstring, .length = strlen(_cstring) + 1 }})
 // Each key is 32 chars
 #define ACCOUNT_KEY_LENGTH 33 // 33 for null character
 #define MAX_ACCOUNT_NAME_LENGTH 20
@@ -29,9 +31,23 @@ static uint8_t sync_buffer[256];
 #define TIMER_LAYER_Y_COORD 121
 #define TEXT_LAYER_WIDTH 110
 
+#define ACCOUNT_INIT_START_INDEX 55
+#define ACCOUNT_INIT_END_INDEX 56
+
+// Persistent storage
+#define PS_ACCOUNT_ONE_KEY 10
+#define PS_ACCOUNT_TWO_KEY 20
+#define PS_ACCOUNT_THREE_KEY 30
+
+#define PS_ACCOUNT_ONE_NAME 11
+#define PS_ACCOUNT_TWO_NAME 21
+#define PS_ACCOUNT_THREE_NAME 31
+
 int prev_epoch = 0;
 int current_epoch = 0;
 int timer_count = 30;
+int initial_sync_complete = 0;
+
 char* timer_text = "..";
 
 char account_one_key[ACCOUNT_KEY_LENGTH];
@@ -122,6 +138,7 @@ static void sync_error_callback(DictionaryResult dict_error, AppMessageResult ap
 }
 
 int get_next_available_account() {
+  
   if (account_one_key[0] == 0) {
     return ACCOUNT_ONE;
   } else if (account_two_key[0] == 0) {
@@ -131,7 +148,18 @@ int get_next_available_account() {
   } else {
     return NO_ACCOUNT;
   }
-
+  
+  /*
+  if (!persist_exists(PS_ACCOUNT_ONE_KEY)) {
+    return ACCOUNT_ONE;
+  } else if (!persist_exists(PS_ACCOUNT_TWO_KEY)) {
+    return ACCOUNT_TWO;
+  } else if (!persist_exists(PS_ACCOUNT_THREE_KEY)) {
+    return ACCOUNT_THREE;
+  } else {
+    return NO_ACCOUNT;
+  }
+  */
 }
 
 void set_next_account_name(const char* name) {
@@ -139,16 +167,22 @@ void set_next_account_name(const char* name) {
 
   if (next_account == ACCOUNT_ONE) {
     strcpy(account_one_name, name);
+    persist_write_string(PS_ACCOUNT_ONE_NAME, account_one_name);
+
     text_layer_set_text(account_one_name_layer, account_one_name);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account one name.");
 
   } else if (next_account == ACCOUNT_TWO) {
     strcpy(account_two_name, name);
+    persist_write_string(PS_ACCOUNT_TWO_NAME, account_two_name);
+
     text_layer_set_text(account_two_name_layer, account_two_name);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account two name.");
 
   } else if (next_account == ACCOUNT_THREE) {
     strcpy(account_three_name, name);
+    persist_write_string(PS_ACCOUNT_THREE_NAME, account_three_name);
+
     text_layer_set_text(account_three_name_layer, account_three_name);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account three name.");
   } else {
@@ -158,14 +192,13 @@ void set_next_account_name(const char* name) {
 
 void updateCodeWithKey(char* code, char* key) {    
   unsigned char unsignedKey[] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-  unsigned char test[40];
+  unsigned char decodedKey[40];
   int length; 
 
   memcpy(unsignedKey, key, 40);
-  length = base32_decode(unsignedKey, test, 40);
-  static char tokenText[] = "TESTIN";
+  length = base32_decode(unsignedKey, decodedKey, 40);
+  static char tokenText[] = "XXXXXX";
 
-  char *str = (char *)malloc(42);
   sha1nfo s;
   uint8_t *hash;
   int cur_time;
@@ -190,10 +223,9 @@ void updateCodeWithKey(char* code, char* key) {
   sha1_time[6] = (cur_time >> 8) & 0XFF;
   sha1_time[7] = cur_time & 0xFF;
 
-  sha1_initHmac(&s, test, length);
+  sha1_initHmac(&s, decodedKey, length);
   sha1_write(&s, sha1_time, 8);
-  hash = sha1_resultHmac(&s);
-  printHash(hash, str);
+  sha1_resultHmac(&s);
 
   ofs = s.state.b[19] & 0xf;
   otp = 0;
@@ -214,6 +246,7 @@ void updateCodeWithKey(char* code, char* key) {
 }
 
 void clearAllData() {
+  
   account_one_key[0] = (char) 0;
   account_one_name[0] = (char) 0;
   account_one_code[0] = (char) 0;
@@ -225,6 +258,13 @@ void clearAllData() {
   account_three_key[0] = (char) 0;
   account_three_name[0] = (char) 0;
   account_three_code[0] = (char) 0;
+  
+  persist_delete(PS_ACCOUNT_ONE_KEY);
+  persist_delete(PS_ACCOUNT_ONE_NAME);
+  persist_delete(PS_ACCOUNT_TWO_KEY);
+  persist_delete(PS_ACCOUNT_TWO_NAME);
+  persist_delete(PS_ACCOUNT_THREE_KEY);
+  persist_delete(PS_ACCOUNT_THREE_NAME);
 
   layer_mark_dirty(text_layer_get_layer(account_one_name_layer)); 
   layer_mark_dirty(text_layer_get_layer(account_one_code_layer)); 
@@ -274,18 +314,22 @@ void set_next_account_key(const char* key) {
 
   if (next_account == ACCOUNT_ONE) {
     strcpy(account_one_key, key);
+    persist_write_string(PS_ACCOUNT_ONE_KEY, account_one_key);
     updateCodes();
     text_layer_set_text(account_one_code_layer, account_one_code);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account one key and code.");
-
   } else if (next_account == ACCOUNT_TWO) {
     strcpy(account_two_key, key);
+    persist_write_string(PS_ACCOUNT_TWO_KEY, account_two_key);
+
     updateCodes();
     text_layer_set_text(account_two_code_layer, account_two_code);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account two key and code.");
 
   } else if (next_account == ACCOUNT_THREE) {
     strcpy(account_three_key, key);
+    persist_write_string(PS_ACCOUNT_THREE_KEY, account_three_key);
+
     updateCodes();
     text_layer_set_text(account_three_code_layer, account_three_code);
     APP_LOG(APP_LOG_LEVEL_DEBUG, "Set account three key and code.");
@@ -297,39 +341,61 @@ void set_next_account_key(const char* key) {
 
 // Required to recieve stuff
 static void sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tuple, const Tuple* old_tuple, void* context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "value: %s", new_tuple->value->cstring);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "key: %d", (uint8_t) key);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Key: %d", (uint8_t) key);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Value: %s", new_tuple->value->cstring);
+  // APP_LOG(APP_LOG_LEVEL_DEBUG, "Time: %d", (int) intervals());
 
-  
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Time: %d", (int) intervals());
+  if (initial_sync_complete == 2) {
+    switch (key) {
+      case ACCOUNT_NAME_INDEX:
+          // Data for Edit and Create command
+          if (strlen(new_tuple->value->cstring) > 0) {
+            set_next_account_name(new_tuple->value->cstring);
+          } else {
+            clearAllData();
+          }
 
-
-  switch (key) {
-    case ACCOUNT_NAME_INDEX:
-        // Data for Edit and Create command
-        if (strlen(new_tuple->value->cstring) > 0) {
-          set_next_account_name(new_tuple->value->cstring);
-        } else {
-          clearAllData();
-        }
-
+          break;
+      case ACCOUNT_TIME_BASED_KEY_INDEX:
+          // Data for Edit and Create command
+          // text_layer_set_text(third_text_layer, new_tuple->value->cstring);
+          if (strlen(new_tuple->value->cstring) > 0) {
+            set_next_account_key(new_tuple->value->cstring);
+          } else {
+            clearAllData();
+          }
         break;
-    case ACCOUNT_TIME_BASED_KEY_INDEX:
-        // Data for Edit and Create command
-        // text_layer_set_text(third_text_layer, new_tuple->value->cstring);
-        if (strlen(new_tuple->value->cstring) > 0) {
-          set_next_account_key(new_tuple->value->cstring);
-        } else {
-          clearAllData();
-        }
-
-        break;
+    }
+  } else {
+    if (initial_sync_complete == 1) {
+      layer_mark_dirty(text_layer_get_layer(account_one_name_layer)); 
+      layer_mark_dirty(text_layer_get_layer(account_one_code_layer)); 
+      layer_mark_dirty(text_layer_get_layer(account_two_name_layer)); 
+      layer_mark_dirty(text_layer_get_layer(account_two_code_layer)); 
+      layer_mark_dirty(text_layer_get_layer(account_three_name_layer)); 
+      layer_mark_dirty(text_layer_get_layer(account_three_code_layer));
+    }
+    initial_sync_complete = initial_sync_complete + 1;
   }
+  
 }
 
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
+
+  persist_read_string(PS_ACCOUNT_ONE_KEY, account_one_key, sizeof(account_one_key));
+  persist_read_string(PS_ACCOUNT_ONE_NAME, account_one_name, sizeof(account_one_name));
+
+  persist_read_string(PS_ACCOUNT_TWO_KEY, account_two_key, sizeof(account_two_key));
+  persist_read_string(PS_ACCOUNT_TWO_NAME, account_two_name, sizeof(account_two_name));
+
+  persist_read_string(PS_ACCOUNT_THREE_KEY, account_three_key, sizeof(account_three_key));
+  persist_read_string(PS_ACCOUNT_THREE_NAME, account_three_name, sizeof(account_three_name));
+  updateCodes();
+
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "name: %s", account_one_name);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "key: %s", account_one_key);
 
   // Setting up the text layer
   timer_layer = text_layer_create(GRect(TIMER_LAYER_X_COORD, TIMER_LAYER_Y_COORD, TIMER_LAYER_WIDTH, TIMER_LAYER_HEIGHT));
@@ -339,40 +405,48 @@ static void window_load(Window *window) {
   text_layer_set_overflow_mode(timer_layer, GTextOverflowModeWordWrap);
 
   account_one_name_layer = text_layer_create(GRect(5, 0, TEXT_LAYER_WIDTH, 25));
-  text_layer_set_text(account_one_name_layer, "");
+  text_layer_set_text(account_one_name_layer, account_one_name);
   text_layer_set_font(account_one_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text_alignment(account_one_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_one_name_layer, GTextOverflowModeWordWrap);
 
   account_one_code_layer = text_layer_create(GRect(10, 25, TEXT_LAYER_WIDTH, 25));
-  text_layer_set_text(account_one_code_layer, "");
+  text_layer_set_text(account_one_code_layer, account_one_code);
   text_layer_set_font(account_one_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(account_one_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_one_code_layer, GTextOverflowModeWordWrap);
 
   account_two_name_layer = text_layer_create(GRect(5, 50, TEXT_LAYER_WIDTH, 25));
   text_layer_set_font(account_two_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text(account_two_name_layer, "");
+  text_layer_set_text(account_two_name_layer, account_two_name);
   text_layer_set_text_alignment(account_two_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_two_name_layer, GTextOverflowModeWordWrap);
 
   account_two_code_layer = text_layer_create(GRect(10, 75, TEXT_LAYER_WIDTH, 25));
-  text_layer_set_text(account_two_code_layer, "");
+  text_layer_set_text(account_two_code_layer, account_two_code);
   text_layer_set_font(account_two_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   text_layer_set_text_alignment(account_two_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_two_code_layer, GTextOverflowModeWordWrap);
 
   account_three_name_layer = text_layer_create(GRect(5, 100, TEXT_LAYER_WIDTH, 25));
   text_layer_set_font(account_three_name_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
-  text_layer_set_text(account_three_name_layer, "");
+  text_layer_set_text(account_three_name_layer, account_three_name);
   text_layer_set_text_alignment(account_three_name_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_three_name_layer, GTextOverflowModeWordWrap);
 
   account_three_code_layer = text_layer_create(GRect(10, 125, TEXT_LAYER_WIDTH, 25));
   text_layer_set_font(account_three_code_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(account_three_code_layer, "");
+  text_layer_set_text(account_three_code_layer, account_three_code);
   text_layer_set_text_alignment(account_three_code_layer, GTextAlignmentLeft);
   text_layer_set_overflow_mode(account_three_code_layer, GTextOverflowModeWordWrap);
+
+  layer_add_child(window_layer, text_layer_get_layer(timer_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_one_name_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_one_code_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_two_name_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_two_code_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_three_name_layer));
+  layer_add_child(window_layer, text_layer_get_layer(account_three_code_layer));
 
   // This is required to recieve stuff 
   Tuplet initial_values[] = {
@@ -382,13 +456,6 @@ static void window_load(Window *window) {
   app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
         sync_tuple_changed_callback, sync_error_callback, NULL);
 
-  layer_add_child(window_layer, text_layer_get_layer(timer_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_one_name_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_one_code_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_two_name_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_two_code_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_three_name_layer));
-  layer_add_child(window_layer, text_layer_get_layer(account_three_code_layer));
 
 }
 
@@ -429,7 +496,7 @@ static void init(void) {
     .load = window_load,
     .unload = window_unload,
   });
-    printf("here");
+
   // Required to recieve stuff
   const int inbound_size = app_message_inbox_size_maximum();
   const int outbound_size = app_message_outbox_size_maximum();
@@ -452,9 +519,6 @@ int main(void) {
   account_three_key[0] = 0;
 
   init();
-
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
-
   app_event_loop();
   deinit();
 }

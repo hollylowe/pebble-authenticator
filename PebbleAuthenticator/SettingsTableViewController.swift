@@ -17,7 +17,9 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.connectedWatchCell.textLabel.text = "Connected Watch"
+        if let textLabel = self.connectedWatchCell.textLabel {
+            textLabel.text = "Connected Watch"
+        }
         
         if let watch = appDelegate.targetWatch {
             if let detailTextLabel = self.connectedWatchCell.detailTextLabel {

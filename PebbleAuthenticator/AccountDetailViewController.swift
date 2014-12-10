@@ -22,8 +22,13 @@ class AccountDetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         
-        self.nameCell.textLabel.text = account.name
-        self.keyCell.textLabel.text = account.timeBasedKey
+        if let textLabel = self.nameCell.textLabel {
+            textLabel.text = account.name
+        }
+
+        if let textLabel = self.keyCell.textLabel {
+            textLabel.text = account.timeBasedKey
+        }
         
         super.viewDidLoad()
 
@@ -34,8 +39,14 @@ class AccountDetailViewController: UITableViewController {
     }
     
     func updateAccountTextFieldsWithName(name: String, andKey key: String) {
-        self.nameCell.textLabel.text = name
-        self.keyCell.textLabel.text = key
+        if let textLabel = self.nameCell.textLabel {
+            textLabel.text = name
+        }
+        
+        if let textLabel = self.keyCell.textLabel {
+            textLabel.text = key
+        }
+
         self.title = name
         self.delegate.reloadTableView()
     }

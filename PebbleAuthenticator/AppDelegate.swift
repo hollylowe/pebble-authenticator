@@ -70,9 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
             updateQueue.append(clearDictionary)
             
             for account in accounts {
+                let key = account.timeBasedKey.stringByReplacingOccurrencesOfString(" ", withString: "")
                 let accountDictionary = [
                     accountNameIndex: account.name,
-                    accountKeyIndex: account.timeBasedKey.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    accountKeyIndex: key
                     ] as NSDictionary
                 
                 updateQueue.append(accountDictionary)
